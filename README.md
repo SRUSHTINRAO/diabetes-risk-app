@@ -9,9 +9,13 @@ Built as a healthcare-focused CS project with real-world impact.
 
 ## 📌 Problem Statement
 
-India has 77 million diabetics — the highest in the world. Most cases go undetected
-until complications arise. This tool helps individuals assess their risk early using
-simple health parameters, encouraging timely medical consultation.
+India faces a severe diabetes epidemic with an estimated 101 million adults
+living with diabetes and another 136 million with pre-diabetes. Over 90% of
+cases are Type 2, driven by rapid urbanization, sedentary lifestyles, and
+genetic predispositions. Alarmingly, over 50% of patients remain undiagnosed.
+
+This tool helps individuals assess their risk early using simple health
+parameters, encouraging timely medical consultation before complications arise.
 
 ---
 
