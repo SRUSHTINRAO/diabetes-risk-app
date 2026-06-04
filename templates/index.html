@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Risk Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f4f8; }
+        .card { border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header { background: #2c7be5; color: white; border-radius: 16px 16px 0 0; padding: 24px; text-align: center; }
+        .btn-predict { background: #2c7be5; color: white; width: 100%; padding: 12px;
+                       font-size: 1.1rem; border-radius: 8px; border: none; }
+        .btn-predict:hover { background: #1a68d1; color: white; }
+        .field-error { border-color: #dc3545 !important; background: #fff8f8; }
+        .error-msg { color: #dc3545; font-size: 0.8rem; margin-top: 3px; }
+        .nav-tips { float: right; color: white; text-decoration: none;
+                    background: rgba(255,255,255,0.2); padding: 6px 14px;
+                    border-radius: 20px; font-size: 0.9rem; }
+        .nav-tips:hover { background: rgba(255,255,255,0.35); color: white; }
+    </style>
+</head>
+<body>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="header">
+                    <a href="/tips" class="nav-tips">💡 Health Tips</a>
+                    <h2>🏥 Diabetes Risk Predictor</h2>
+                    <p class="mb-0">Enter your health parameters below</p>
+                </div>
+                <div class="card-body p-4">
+
+                    {% if errors %}
+                    <div class="alert alert-danger">
+                        ⚠️ Please fix the highlighted fields before continuing.
+                    </div>
+                    {% endif %}
+
+                    <form action="/predict" method="POST">
+                        <div class="row">
+
+                            <!-- Pregnancies -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Pregnancies</label>
+                                <input type="number" name="pregnancies"
+                                    class="form-control {% if errors.pregnancies %}field-error{% endif %}"
+                                    placeholder="e.g. 2" value="{{ values.pregnancies }}">
+                                {% if errors.pregnancies %}
+                                <div class="error-msg">⚠️ {{ errors.pregnancies }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Glucose -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Glucose Level</label>
+                                <input type="number" name="glucose"
+                                    class="form-control {% if errors.glucose %}field-error{% endif %}"
+                                    placeholder="e.g. 120" value="{{ values.glucose }}">
+                                <small class="text-muted">Normal: 70–99 mg/dL</small>
+                                {% if errors.glucose %}
+                                <div class="error-msg">⚠️ {{ errors.glucose }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Blood Pressure -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Blood Pressure</label>
+                                <input type="number" name="bloodpressure"
+                                    class="form-control {% if errors.bloodpressure %}field-error{% endif %}"
+                                    placeholder="e.g. 72" value="{{ values.bloodpressure }}">
+                                <small class="text-muted">Normal: 60–80 mm Hg</small>
+                                {% if errors.bloodpressure %}
+                                <div class="error-msg">⚠️ {{ errors.bloodpressure }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Skin Thickness -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Skin Thickness</label>
+                                <input type="number" name="skinthickness"
+                                    class="form-control {% if errors.skinthickness %}field-error{% endif %}"
+                                    placeholder="e.g. 25" value="{{ values.skinthickness }}">
+                                <small class="text-muted">Normal: 10–40 mm</small>
+                                {% if errors.skinthickness %}
+                                <div class="error-msg">⚠️ {{ errors.skinthickness }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Insulin -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Insulin Level</label>
+                                <input type="number" name="insulin"
+                                    class="form-control {% if errors.insulin %}field-error{% endif %}"
+                                    placeholder="e.g. 80" value="{{ values.insulin }}">
+                                <small class="text-muted">Normal: 16–166 µU/mL</small>
+                                {% if errors.insulin %}
+                                <div class="error-msg">⚠️ {{ errors.insulin }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- BMI -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">BMI</label>
+                                <input type="number" step="0.1" name="bmi"
+                                    class="form-control {% if errors.bmi %}field-error{% endif %}"
+                                    placeholder="e.g. 28.5" value="{{ values.bmi }}">
+                                <small class="text-muted">Normal: 18.5–24.9</small>
+                                {% if errors.bmi %}
+                                <div class="error-msg">⚠️ {{ errors.bmi }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- DPF -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Diabetes Pedigree Function</label>
+                                <input type="number" step="0.001" name="dpf"
+                                    class="form-control {% if errors.dpf %}field-error{% endif %}"
+                                    placeholder="e.g. 0.350" value="{{ values.dpf }}">
+                                <small class="text-muted">Genetic risk score (0.0–2.5)</small>
+                                {% if errors.dpf %}
+                                <div class="error-msg">⚠️ {{ errors.dpf }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Age -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Age</label>
+                                <input type="number" name="age"
+                                    class="form-control {% if errors.age %}field-error{% endif %}"
+                                    placeholder="e.g. 35" value="{{ values.age }}">
+                                {% if errors.age %}
+                                <div class="error-msg">⚠️ {{ errors.age }}</div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn-predict mt-2">🔍 Predict My Risk</button>
+                    </form>
+                </div>
+            </div>
+            <p class="text-center text-muted mt-3" style="font-size:0.85rem;">
+                ⚠️ This tool is for educational purposes only. Always consult a qualified doctor.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

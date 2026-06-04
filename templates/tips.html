@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prevention Tips</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f4f8; }
+        .header {
+            background: linear-gradient(135deg, #2c7be5, #1a68d1);
+            color: white; padding: 40px 20px;
+            text-align: center; border-radius: 0 0 30px 30px;
+            margin-bottom: 30px;
+        }
+        .tip-card {
+            border-radius: 14px;
+            border: none;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        .tip-card .card-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 14px 20px;
+            border: none;
+        }
+        .tip-card .card-body { padding: 20px; }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 10px 14px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .tip-icon { font-size: 1.4rem; margin-right: 12px; min-width: 30px; }
+        .tip-text { font-size: 0.95rem; line-height: 1.5; }
+        .tip-text strong { display: block; margin-bottom: 2px; }
+        .badge-normal {
+            background: #e8f5e9; color: #2e7d32;
+            padding: 4px 10px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 600;
+        }
+        .badge-avoid {
+            background: #ffebee; color: #c62828;
+            padding: 4px 10px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 600;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px; padding: 16px;
+            text-align: center;
+        }
+        .stat-box h3 { font-size: 2rem; font-weight: bold; margin: 0; }
+        .stat-box p  { margin: 0; font-size: 0.85rem; opacity: 0.9; }
+        .btn-blue {
+            background: #2c7be5;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px;
+        }
+        .btn-blue:hover { background: #1a68d1; color: white; }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>💚 Diabetes Prevention Guide</h1>
+    <p class="mb-4">Simple, science-backed tips to lower your risk</p>
+    <div class="row justify-content-center g-3" style="max-width:600px; margin:0 auto;">
+        <div class="col-4">
+            <div class="stat-box">
+                <h3>80%</h3>
+                <p>of Type 2 diabetes cases are preventable</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="stat-box">
+                <h3>77M</h3>
+                <p>diabetics in India — highest in the world</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="stat-box">
+                <h3>5%</h3>
+                <p>weight loss can cut risk by up to 50%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- Diet: What to Eat -->
+            <div class="tip-card card">
+                <div class="card-header" style="background:#e3f2fd; color:#1565c0;">
+                    🥗 Diet — What to Eat
+                </div>
+                <div class="card-body">
+                    <div class="tip-item">
+                        <div class="tip-icon">🌾</div>
+                        <div class="tip-text">
+                            <strong>Choose whole grains over refined</strong>
+                            Swap white rice and maida with brown rice, ragi, jowar or whole wheat. They digest slowly and keep blood sugar stable.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🥦</div>
+                        <div class="tip-text">
+                            <strong>Fill half your plate with vegetables</strong>
+                            Leafy greens like spinach, methi and palak are especially good — low in carbs, high in fibre and nutrients.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🫘</div>
+                        <div class="tip-text">
+                            <strong>Eat more legumes and pulses</strong>
+                            Dal, rajma, chana and moong are high in protein and fibre — they slow glucose absorption significantly.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">💧</div>
+                        <div class="tip-text">
+                            <strong>Drink water, not sugary drinks</strong>
+                            Replace chai with extra sugar, soft drinks and packaged juices with plain water, buttermilk or unsweetened nimbu pani.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🥜</div>
+                        <div class="tip-text">
+                            <strong>Healthy snacking</strong>
+                            Choose a handful of nuts, roasted chana or fresh fruit over biscuits, namkeen or fried snacks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet: What to Avoid -->
+            <div class="tip-card card">
+                <div class="card-header" style="background:#ffebee; color:#c62828;">
+                    🚫 Diet — What to Limit
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="tip-item">
+                                <div class="tip-icon">🍚</div>
+                                <div class="tip-text">
+                                    <strong>White rice in large portions</strong>
+                                    Eat smaller quantities — pair with dal and vegetables to slow absorption.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tip-item">
+                                <div class="tip-icon">🧁</div>
+                                <div class="tip-text">
+                                    <strong>Sweets and mithai</strong>
+                                    Especially avoid daily sweets — even natural ones like jaggery spike blood sugar.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tip-item">
+                                <div class="tip-icon">🥤</div>
+                                <div class="tip-text">
+                                    <strong>Packaged fruit juices</strong>
+                                    They contain as much sugar as cola — eat whole fruit instead.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tip-item">
+                                <div class="tip-icon">🍟</div>
+                                <div class="tip-text">
+                                    <strong>Deep fried foods</strong>
+                                    Samosas, pakodas and puri regularly increase BMI and insulin resistance.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercise -->
+            <div class="tip-card card">
+                <div class="card-header" style="background:#e8f5e9; color:#2e7d32;">
+                    🏃 Exercise — Move More
+                </div>
+                <div class="card-body">
+                    <div class="tip-item">
+                        <div class="tip-icon">🚶</div>
+                        <div class="tip-text">
+                            <strong>Walk 30 minutes every day</strong>
+                            The single most effective and accessible exercise for diabetes prevention. Even a brisk walk after dinner helps significantly.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🧘</div>
+                        <div class="tip-text">
+                            <strong>Yoga twice a week</strong>
+                            Poses like Surya Namaskar, Paschimottanasana and Vrikshasana help regulate blood sugar and reduce stress hormones.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🏋️</div>
+                        <div class="tip-text">
+                            <strong>Strength training helps too</strong>
+                            Muscle tissue uses glucose as fuel — more muscle means better blood sugar control. Simple bodyweight exercises work fine.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">📵</div>
+                        <div class="tip-text">
+                            <strong>Break sitting time every hour</strong>
+                            Stand up, stretch or walk for 5 minutes every hour if you have a desk job or study long hours.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lifestyle -->
+            <div class="tip-card card">
+                <div class="card-header" style="background:#f3e5f5; color:#6a1b9a;">
+                    🌙 Lifestyle Habits
+                </div>
+                <div class="card-body">
+                    <div class="tip-item">
+                        <div class="tip-icon">😴</div>
+                        <div class="tip-text">
+                            <strong>Sleep 7–8 hours every night</strong>
+                            Poor sleep increases cortisol and hunger hormones — both directly raise blood sugar levels and increase diabetes risk.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🧘</div>
+                        <div class="tip-text">
+                            <strong>Manage stress actively</strong>
+                            Chronic stress raises blood glucose. Try meditation, deep breathing or even 10 minutes of quiet time daily.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🩺</div>
+                        <div class="tip-text">
+                            <strong>Check your blood sugar annually</strong>
+                            Especially if you have a family history. Prediabetes has no symptoms — early detection is everything.
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">⚖️</div>
+                        <div class="tip-text">
+                            <strong>Maintain a healthy weight</strong>
+                            Even losing 3–5 kg if you're overweight dramatically reduces your risk — you don't need to be thin, just healthier.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Know Your Numbers -->
+            <div class="tip-card card">
+                <div class="card-header" style="background:#fff8e1; color:#e65100;">
+                    📊 Know Your Numbers
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered text-center">
+                        <thead style="background:#f5f5f5;">
+                            <tr>
+                                <th>Measurement</th>
+                                <th><span class="badge-normal">Normal</span></th>
+                                <th><span style="background:#fff3e0; color:#e65100; padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600;">Prediabetes</span></th>
+                                <th><span class="badge-avoid">Diabetes</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fasting Glucose</td>
+                                <td>Below 100 mg/dL</td>
+                                <td>100–125 mg/dL</td>
+                                <td>126+ mg/dL</td>
+                            </tr>
+                            <tr>
+                                <td>BMI</td>
+                                <td>18.5–22.9</td>
+                                <td>23–27.4</td>
+                                <td>27.5+</td>
+                            </tr>
+                            <tr>
+                                <td>Blood Pressure</td>
+                                <td>Below 120/80</td>
+                                <td>120–139/80–89</td>
+                                <td>140/90+</td>
+                            </tr>
+                            <tr>
+                                <td>Waist (Men)</td>
+                                <td>Below 90 cm</td>
+                                <td>90–99 cm</td>
+                                <td>100+ cm</td>
+                            </tr>
+                            <tr>
+                                <td>Waist (Women)</td>
+                                <td>Below 80 cm</td>
+                                <td>80–89 cm</td>
+                                <td>90+ cm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-muted" style="font-size:0.82rem;">
+                        * BMI and waist thresholds use Asian/Indian guidelines which are lower than Western standards.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Button -->
+            <div class="text-center mt-2 mb-4">
+                <a href="/" class="btn-blue">🔍 Check Your Risk Now</a>
+            </div>
+
+            <p class="text-center text-muted mb-5" style="font-size:0.8rem;">
+                For educational purposes only. Always consult a qualified doctor for medical advice.
+            </p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

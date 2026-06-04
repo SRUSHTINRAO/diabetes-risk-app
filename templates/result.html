@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f0f4f8; }
+        .card { border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .progress { height: 20px; border-radius: 10px; }
+        .btn-blue {
+            background: #2c7be5;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px;
+        }
+        .btn-blue:hover { background: #1a68d1; color: white; }
+        .btn-green {
+            background: #28a745;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px;
+        }
+        .btn-green:hover { background: #218838; color: white; }
+    </style>
+</head>
+<body>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card">
+
+                <!-- Header -->
+                <div style="background: {{ color }}; color: white; border-radius: 16px 16px 0 0; padding: 30px; text-align: center;">
+                    <h2>Your Risk Assessment</h2>
+                    <div style="font-size:1.4rem; font-weight:bold; padding: 8px 24px;
+                                border-radius: 50px; background: white; color: {{ color }};
+                                display: inline-block; margin-top: 8px;">
+                        {{ risk }} Risk — {{ prediction }}
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Probability Bar -->
+                    <h5 class="fw-bold">Diabetes Probability</h5>
+                    <div class="progress mb-1">
+                        <div class="progress-bar" role="progressbar"
+                             style="width: {{ probability }}%; background-color: {{ color }};">
+                            {{ probability }}%
+                        </div>
+                    </div>
+                    <small class="text-muted">Based on your 8 health indicators</small>
+
+                    <!-- Advice -->
+                    <div class="alert mt-4" style="border-left: 5px solid {{ color }}; background: #f8f9fa;">
+                        <h6 class="fw-bold">What this means:</h6>
+                        <p class="mb-0">{{ advice }}</p>
+                    </div>
+
+                    <!-- Input Summary -->
+                    <h6 class="fw-bold mt-4">Your Inputs</h6>
+                    <table class="table table-sm table-bordered">
+                        <tr><td>Pregnancies</td>     <td>{{ features[0]|int }}</td></tr>
+                        <tr><td>Glucose</td>          <td>{{ features[1]|round(1) }} mg/dL</td></tr>
+                        <tr><td>Blood Pressure</td>   <td>{{ features[2]|round(1) }} mm Hg</td></tr>
+                        <tr><td>Skin Thickness</td>   <td>{{ features[3]|round(1) }} mm</td></tr>
+                        <tr><td>Insulin</td>          <td>{{ features[4]|round(1) }} uU/mL</td></tr>
+                        <tr><td>BMI</td>              <td>{{ features[5]|round(1) }}</td></tr>
+                        <tr><td>Diabetes Pedigree</td><td>{{ features[6] }}</td></tr>
+                        <tr><td>Age</td>              <td>{{ features[7]|int }} years</td></tr>
+                    </table>
+
+                    <!-- Buttons -->
+                    <div class="text-center mt-4">
+                        <a href="/" class="btn-blue">🔄 Check Again</a>
+                        <a href="/tips" class="btn-green">💚 View Health Tips</a>
+                    </div>
+
+                    <p class="text-center text-muted mt-4" style="font-size:0.8rem;">
+                        For educational use only. Please consult a qualified doctor for medical advice.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
