@@ -82,7 +82,7 @@
                                 {% endif %}
                             </div>
 
-                            <!-- Glucose -->
+                           <!-- Glucose -->
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Glucose Level</label>
                                 <input type="number" name="glucose"
@@ -92,6 +92,46 @@
                                 {% if errors.glucose %}
                                 <div class="error-msg">⚠️ {{ errors.glucose }}</div>
                                 {% endif %}
+
+                                <!-- Glucose Context Toggle -->
+                                <div style="margin-top:8px; background:#f8f9fa;
+                                            border-radius:8px; padding:10px;
+                                            border-left:3px solid #2c7be5;">
+                                    <small class="fw-bold" style="color:#1565c0;">
+                                        📋 When was this measured?
+                                    </small>
+                                    <div style="margin-top:6px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio"
+                                                name="glucose_context" id="gc_fasting"
+                                                value="fasting">
+                                            <label class="form-check-label" style="font-size:0.85rem;"
+                                                for="gc_fasting">
+                                                🌙 Fasting (8+ hours without food)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio"
+                                                name="glucose_context" id="gc_after_meal"
+                                                value="after_meal">
+                                            <label class="form-check-label" style="font-size:0.85rem;"
+                                                for="gc_after_meal">
+                                                🍽️ After a meal
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio"
+                                                name="glucose_context" id="gc_random"
+                                                value="random" checked>
+                                            <label class="form-check-label" style="font-size:0.85rem;"
+                                                for="gc_random">
+                                                ❓ Random / I don't know
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Glucose Context Toggle -->
+
                             </div>
 
                             <!-- Blood Pressure -->
