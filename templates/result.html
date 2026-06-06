@@ -49,15 +49,22 @@
 
                 <div class="card-body p-4">
 
-                    <!-- Probability Bar -->
-                    <h5 class="fw-bold">Diabetes Probability</h5>
-                    <div class="progress mb-1">
-                        <div class="progress-bar" role="progressbar"
-                             style="width: {{ probability }}%; background-color: {{ color }};">
-                            {{ probability }}%
+                    <!-- RISK METER GAUGE -->
+                    <div style="text-align:center; margin: 10px 0 0 0;">
+                        <canvas id="gaugeCanvas" width="300" height="170"
+                                style="max-width:100%;"></canvas>
+                        <div id="gaugeLabel" style="margin-top:-10px;">
+                            <span style="font-size:2rem; font-weight:800;
+                                         color:{{ color }};">
+                                {{ probability }}%
+                            </span>
+                            <br>
+                            <small class="text-muted">
+                                Based on your 8 health indicators
+                            </small>
                         </div>
                     </div>
-                    <small class="text-muted">Based on your 8 health indicators</small>
+                    <!-- END RISK METER GAUGE -->
 
                     <!-- Advice -->
                     <div class="alert mt-4" style="border-left: 5px solid {{ color }}; background: #f8f9fa;">
@@ -93,5 +100,131 @@
         </div>
     </div>
 </div>
+<script>
+// ── Configuration ────────────────────────────────────────
+const PROBABILITY = {{ probability }};   // 0 – 100
+const COLOR       = "{{ color }}";       // green / orange / red
+
+// ── Canvas setup ─────────────────────────────────────────
+const canvas = document.getElementById("gaugeCanvas");
+const ctx    = canvas.getContext("2d");
+const cx     = canvas.width  / 2;   // centre x
+const cy     = canvas.height - 20;  // centre y (near bottom)
+const R      = 120;                  // arc radius
+
+// ── Helpers ───────────────────────────────────────────────
+// Convert gauge percentage (0-100) to canvas angle
+// Gauge goes from 180° (left) to 0° (right) — a semicircle
+function pctToAngle(pct) {
+    return Math.PI - (pct / 100) * Math.PI;
+}
+
+function polarToXY(angle, radius) {
+    return {
+        x: cx + radius * Math.cos(angle),
+        y: cy - radius * Math.sin(angle)
+    };
+}
+
+// ── Draw background arc (grey track) ─────────────────────
+ctx.beginPath();
+ctx.arc(cx, cy, R, Math.PI, 0, false);
+ctx.lineWidth   = 22;
+ctx.strokeStyle = "#e0e0e0";
+ctx.lineCap     = "butt";
+ctx.stroke();
+
+// ── Draw coloured zone arcs ───────────────────────────────
+const zones = [
+    { from: 0,  to: 30,  color: "#28a745" },   // green
+    { from: 30, to: 60,  color: "#e65100" },   // orange
+    { from: 60, to: 100, color: "#c62828" },   // red
+];
+
+zones.forEach(z => {
+    const startAngle = pctToAngle(z.from);
+    const endAngle   = pctToAngle(z.to);
+    ctx.beginPath();
+    // arc goes clockwise from startAngle to endAngle
+    ctx.arc(cx, cy, R, startAngle, endAngle, true);
+    ctx.lineWidth   = 22;
+    ctx.strokeStyle = z.color;
+    ctx.stroke();
+});
+
+// ── Draw zone labels ──────────────────────────────────────
+const labels = [
+    { pct: 15,  text: "Low",    color: "#28a745" },
+    { pct: 45,  text: "Medium", color: "#e65100" },
+    { pct: 80,  text: "High",   color: "#c62828" },
+];
+
+labels.forEach(l => {
+    const angle = pctToAngle(l.pct);
+    const pos   = polarToXY(angle, R - 38);
+    ctx.fillStyle  = l.color;
+    ctx.font       = "bold 11px Helvetica, Arial";
+    ctx.textAlign  = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(l.text, pos.x, pos.y);
+});
+
+// ── Draw needle ───────────────────────────────────────────
+const needleAngle = pctToAngle(PROBABILITY);
+const needleTip   = polarToXY(needleAngle, R - 10);
+const needleLeft  = polarToXY(needleAngle + Math.PI / 2, 10);
+const needleRight = polarToXY(needleAngle - Math.PI / 2, 10);
+
+ctx.beginPath();
+ctx.moveTo(needleLeft.x,  needleLeft.y);
+ctx.lineTo(needleTip.x,   needleTip.y);
+ctx.lineTo(needleRight.x, needleRight.y);
+ctx.closePath();
+ctx.fillStyle = "#333333";
+ctx.fill();
+
+// ── Draw centre pivot circle ──────────────────────────────
+ctx.beginPath();
+ctx.arc(cx, cy, 10, 0, 2 * Math.PI);
+ctx.fillStyle = "#333333";
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(cx, cy, 5, 0, 2 * Math.PI);
+ctx.fillStyle = "#ffffff";
+ctx.fill();
+
+// ── Draw tick marks at 0%, 30%, 60%, 100% ────────────────
+const ticks = [0, 30, 60, 100];
+ticks.forEach(pct => {
+    const angle  = pctToAngle(pct);
+    const inner  = polarToXY(angle, R - 28);
+    const outer  = polarToXY(angle, R + 2);
+    ctx.beginPath();
+    ctx.moveTo(inner.x, inner.y);
+    ctx.lineTo(outer.x, outer.y);
+    ctx.lineWidth   = 2;
+    ctx.strokeStyle = "#ffffff";
+    ctx.stroke();
+});
+
+// ── Draw percentage labels at tick marks ──────────────────
+const tickLabels = [
+    { pct: 0,   text: "0%"   },
+    { pct: 30,  text: "30%"  },
+    { pct: 60,  text: "60%"  },
+    { pct: 100, text: "100%" },
+];
+
+tickLabels.forEach(l => {
+    const angle = pctToAngle(l.pct);
+    const pos   = polarToXY(angle, R + 16);
+    ctx.fillStyle    = "#888888";
+    ctx.font         = "9px Helvetica, Arial";
+    ctx.textAlign    = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(l.text, pos.x, pos.y);
+});
+</script>
 </body>
 </html>
