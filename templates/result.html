@@ -193,10 +193,53 @@
                         </p>
                     </div>
 
+                    <!-- Hidden form to pass data to /download -->
+                    <form id="downloadForm" action="/download" method="POST"
+                          style="display:none;">
+                        <input type="hidden" name="pregnancies"
+                               value="{{ features[0] }}">
+                        <input type="hidden" name="glucose"
+                               value="{{ features[1] }}">
+                        <input type="hidden" name="bloodpressure"
+                               value="{{ features[2] }}">
+                        <input type="hidden" name="skinthickness"
+                               value="{{ features[3] }}">
+                        <input type="hidden" name="insulin"
+                               value="{{ features[4] }}">
+                        <input type="hidden" name="bmi"
+                               value="{{ features[5] }}">
+                        <input type="hidden" name="dpf"
+                               value="{{ features[6] }}">
+                        <input type="hidden" name="age"
+                               value="{{ features[7] }}">
+                        <input type="hidden" name="prediction"
+                               value="{{ prediction }}">
+                        <input type="hidden" name="probability"
+                               value="{{ probability }}">
+                        <input type="hidden" name="risk"
+                               value="{{ risk }}">
+                        <input type="hidden" name="color"
+                               value="{{ color }}">
+                        <input type="hidden" name="advice"
+                               value="{{ advice }}">
+                        <input type="hidden" name="glucose_context"
+       value="{{ glucose_context }}">
+                        <input type="hidden" name="glucose_context_label"
+                               value="{{ glucose_context_label }}">
+                    </form>
+
                     <!-- Buttons -->
                     <div class="text-center mt-4">
                         <a href="/" class="btn-blue">🔄 Check Again</a>
                         <a href="/tips" class="btn-green">💚 View Health Tips</a>
+                        <button onclick="downloadReport()"
+                            style="background:#6f42c1; color:white;
+                                   padding:10px 30px; border-radius:8px;
+                                   border:none; text-decoration:none;
+                                   display:inline-block; margin:4px;
+                                   cursor:pointer;">
+                            📄 Download Report
+                        </button>
                     </div>
 
                     <p class="text-center text-muted mt-4" style="font-size:0.8rem;">
@@ -213,6 +256,9 @@
 <script>
 const PROBABILITY = {{ probability }};
 const COLOR       = "{{ color }}";
+function downloadReport() {
+    document.getElementById('downloadForm').submit();
+}
 
 const canvas = document.getElementById("gaugeCanvas");
 const ctx    = canvas.getContext("2d");
