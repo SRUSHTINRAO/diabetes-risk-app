@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* ── CSS Variables ── */
+        :root {
+            --bg:           #f0f4f8;
+            --card-bg:      #ffffff;
+            --text:         #1a1a1a;
+            --text-muted:   #6c757d;
+            --input-bg:     #ffffff;
+            --input-border: #ced4da;
+            --input-text:   #1a1a1a;
+            --tip-bg:       #f8f9fa;
+            --error-bg:     #fff8f8;
+        }
+        body.dark {
+            --bg:           #1a1a2e;
+            --card-bg:      #16213e;
+            --text:         #e0e0e0;
+            --text-muted:   #aaaaaa;
+            --input-bg:     #0f3460;
+            --input-border: #444466;
+            --input-text:   #e0e0e0;
+            --tip-bg:       #0f3460;
+            --error-bg:     #3a1a1a;
+        }
+        body {
+            background: var(--bg); color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            transition: background 0.3s;
+        }
+        .header {
+            background: #e53935;
+            color: white; border-radius: 16px 16px 0 0;
+            padding: 24px; text-align: center;
+            position: relative;
+        }
+        .form-control, .form-select {
+            background: var(--input-bg) !important;
+            border-color: var(--input-border) !important;
+            color: var(--input-text) !important;
+            transition: background 0.3s, color 0.3s;
+        }
+        .form-control::placeholder { color: var(--text-muted) !important; }
+        .form-label { color: var(--text); }
+        .text-muted { color: var(--text-muted) !important; }
+        .btn-predict {
+            background: #e53935; color: white; width: 100%;
+            padding: 12px; font-size: 1.1rem;
+            border-radius: 8px; border: none;
+        }
+        .btn-predict:hover { background: #c62828; color: white; }
+        .field-error  {
+            border-color: #dc3545 !important;
+            background: var(--error-bg) !important;
+        }
+        .error-msg { color: #dc3545; font-size: 0.8rem; margin-top: 3px; }
+        .nav-link-btn {
+            color: white; text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px; border-radius: 20px; font-size: 0.9rem;
+        }
+        .nav-link-btn:hover { background: rgba(255,255,255,0.35); color: white; }
+        .dark-toggle {
+            position: absolute; right: 16px; top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none; color: white;
+            padding: 6px 12px; border-radius: 20px;
+            font-size: 1rem; cursor: pointer;
+        }
+        .dark-toggle:hover { background: rgba(255,255,255,0.35); }
+        .info-box {
+            background: var(--tip-bg);
+            border-radius: 8px; padding: 10px 14px;
+            margin-top: 6px; font-size: 0.82rem;
+            color: var(--text-muted);
+            border-left: 3px solid #e53935;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="header">
+                    <a href="/" class="nav-link-btn">🩺 Diabetes Predictor</a>
+                    <h2>❤️ Heart Disease Risk Predictor</h2>
+                    <p class="mb-0">Enter your cardiac health parameters below</p>
+                    <button class="dark-toggle" onclick="toggleDark()"
+                            id="darkBtn">🌙</button>
+                </div>
+                <div class="card-body p-4">
+
+                    {% if errors %}
+                    <div class="alert alert-danger">
+                        ⚠️ Please fix the highlighted fields before continuing.
+                    </div>
+                    {% endif %}
+
+                    <form action="/heart-predict" method="POST">
+                        <div class="row">
+
+                            <!-- Age -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Age</label>
+                                <input type="number" name="age"
+                                    class="form-control {% if errors.age %}field-error{% endif %}"
+                                    placeholder="e.g. 55" value="{{ values.age }}">
+                                {% if errors.age %}
+                                <div class="error-msg">⚠️ {{ errors.age }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Sex -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Sex</label>
+                                <select name="sex"
+                                    class="form-select {% if errors.sex %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.sex %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="1"
+                                        {% if values.sex == '1' %}selected{% endif %}>
+                                        Male
+                                    </option>
+                                    <option value="0"
+                                        {% if values.sex == '0' %}selected{% endif %}>
+                                        Female
+                                    </option>
+                                </select>
+                                {% if errors.sex %}
+                                <div class="error-msg">⚠️ {{ errors.sex }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Chest Pain Type -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Chest Pain Type</label>
+                                <select name="cp"
+                                    class="form-select {% if errors.cp %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.cp %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="0"
+                                        {% if values.cp == '0' %}selected{% endif %}>
+                                        0 — Typical Angina
+                                    </option>
+                                    <option value="1"
+                                        {% if values.cp == '1' %}selected{% endif %}>
+                                        1 — Atypical Angina
+                                    </option>
+                                    <option value="2"
+                                        {% if values.cp == '2' %}selected{% endif %}>
+                                        2 — Non-Anginal Pain
+                                    </option>
+                                    <option value="3"
+                                        {% if values.cp == '3' %}selected{% endif %}>
+                                        3 — Asymptomatic
+                                    </option>
+                                </select>
+                                <div class="info-box">
+                                    Typical Angina = chest pain from heart.
+                                    Asymptomatic = no chest pain (can still have disease)
+                                </div>
+                                {% if errors.cp %}
+                                <div class="error-msg">⚠️ {{ errors.cp }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Resting BP -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Resting Blood Pressure
+                                </label>
+                                <input type="number" name="trestbps"
+                                    class="form-control {% if errors.trestbps %}field-error{% endif %}"
+                                    placeholder="e.g. 120" value="{{ values.trestbps }}">
+                                <small class="text-muted">Normal: below 120 mm Hg</small>
+                                {% if errors.trestbps %}
+                                <div class="error-msg">⚠️ {{ errors.trestbps }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Cholesterol -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Cholesterol
+                                </label>
+                                <input type="number" name="chol"
+                                    class="form-control {% if errors.chol %}field-error{% endif %}"
+                                    placeholder="e.g. 200" value="{{ values.chol }}">
+                                <small class="text-muted">Normal: below 200 mg/dL</small>
+                                {% if errors.chol %}
+                                <div class="error-msg">⚠️ {{ errors.chol }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Fasting Blood Sugar -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Fasting Blood Sugar > 120 mg/dL?
+                                </label>
+                                <select name="fbs"
+                                    class="form-select {% if errors.fbs %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.fbs %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="1"
+                                        {% if values.fbs == '1' %}selected{% endif %}>
+                                        Yes
+                                    </option>
+                                    <option value="0"
+                                        {% if values.fbs == '0' %}selected{% endif %}>
+                                        No
+                                    </option>
+                                </select>
+                                {% if errors.fbs %}
+                                <div class="error-msg">⚠️ {{ errors.fbs }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Resting ECG -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Resting ECG Results
+                                </label>
+                                <select name="restecg"
+                                    class="form-select {% if errors.restecg %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.restecg %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="0"
+                                        {% if values.restecg == '0' %}selected{% endif %}>
+                                        0 — Normal
+                                    </option>
+                                    <option value="1"
+                                        {% if values.restecg == '1' %}selected{% endif %}>
+                                        1 — ST-T Wave Abnormality
+                                    </option>
+                                    <option value="2"
+                                        {% if values.restecg == '2' %}selected{% endif %}>
+                                        2 — Left Ventricular Hypertrophy
+                                    </option>
+                                </select>
+                                {% if errors.restecg %}
+                                <div class="error-msg">⚠️ {{ errors.restecg }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Max Heart Rate -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Max Heart Rate Achieved
+                                </label>
+                                <input type="number" name="thalach"
+                                    class="form-control {% if errors.thalach %}field-error{% endif %}"
+                                    placeholder="e.g. 150" value="{{ values.thalach }}">
+                                <small class="text-muted">Typical range: 60–202 bpm</small>
+                                {% if errors.thalach %}
+                                <div class="error-msg">⚠️ {{ errors.thalach }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Exercise Angina -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Exercise Induced Angina?
+                                </label>
+                                <select name="exang"
+                                    class="form-select {% if errors.exang %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.exang %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="1"
+                                        {% if values.exang == '1' %}selected{% endif %}>
+                                        Yes
+                                    </option>
+                                    <option value="0"
+                                        {% if values.exang == '0' %}selected{% endif %}>
+                                        No
+                                    </option>
+                                </select>
+                                <div class="info-box">
+                                    Chest pain that occurs during exercise or physical activity
+                                </div>
+                                {% if errors.exang %}
+                                <div class="error-msg">⚠️ {{ errors.exang }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- ST Depression -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    ST Depression (Oldpeak)
+                                </label>
+                                <input type="number" step="0.1" name="oldpeak"
+                                    class="form-control {% if errors.oldpeak %}field-error{% endif %}"
+                                    placeholder="e.g. 1.0" value="{{ values.oldpeak }}">
+                                <small class="text-muted">
+                                    ST depression induced by exercise. Normal: 0–0.5
+                                </small>
+                                {% if errors.oldpeak %}
+                                <div class="error-msg">⚠️ {{ errors.oldpeak }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Slope -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Slope of Peak Exercise ST
+                                </label>
+                                <select name="slope"
+                                    class="form-select {% if errors.slope %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.slope %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="0"
+                                        {% if values.slope == '0' %}selected{% endif %}>
+                                        0 — Upsloping
+                                    </option>
+                                    <option value="1"
+                                        {% if values.slope == '1' %}selected{% endif %}>
+                                        1 — Flat
+                                    </option>
+                                    <option value="2"
+                                        {% if values.slope == '2' %}selected{% endif %}>
+                                        2 — Downsloping
+                                    </option>
+                                </select>
+                                {% if errors.slope %}
+                                <div class="error-msg">⚠️ {{ errors.slope }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Major Vessels -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Number of Major Vessels (0–3)
+                                </label>
+                                <select name="ca"
+                                    class="form-select {% if errors.ca %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.ca %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="0"
+                                        {% if values.ca == '0' %}selected{% endif %}>
+                                        0
+                                    </option>
+                                    <option value="1"
+                                        {% if values.ca == '1' %}selected{% endif %}>
+                                        1
+                                    </option>
+                                    <option value="2"
+                                        {% if values.ca == '2' %}selected{% endif %}>
+                                        2
+                                    </option>
+                                    <option value="3"
+                                        {% if values.ca == '3' %}selected{% endif %}>
+                                        3
+                                    </option>
+                                </select>
+                                <div class="info-box">
+                                    Number of major vessels colored by fluoroscopy (0 = best)
+                                </div>
+                                {% if errors.ca %}
+                                <div class="error-msg">⚠️ {{ errors.ca }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Thal -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">
+                                    Thalassemia Type
+                                </label>
+                                <select name="thal"
+                                    class="form-select {% if errors.thal %}field-error{% endif %}">
+                                    <option value="" disabled
+                                        {% if not values.thal %}selected{% endif %}>
+                                        Select...
+                                    </option>
+                                    <option value="0"
+                                        {% if values.thal == '0' %}selected{% endif %}>
+                                        0 — Normal
+                                    </option>
+                                    <option value="1"
+                                        {% if values.thal == '1' %}selected{% endif %}>
+                                        1 — Fixed Defect
+                                    </option>
+                                    <option value="2"
+                                        {% if values.thal == '2' %}selected{% endif %}>
+                                        2 — Reversible Defect
+                                    </option>
+                                    <option value="3"
+                                        {% if values.thal == '3' %}selected{% endif %}>
+                                        3 — Unknown
+                                    </option>
+                                </select>
+                                <div class="info-box">
+                                    Blood disorder affecting hemoglobin.
+                                    Reversible defect = highest risk
+                                </div>
+                                {% if errors.thal %}
+                                <div class="error-msg">⚠️ {{ errors.thal }}</div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn-predict mt-2">
+                            ❤️ Predict Heart Disease Risk
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <p class="text-center text-muted mt-3" style="font-size:0.85rem;">
+                ⚠️ This tool is for educational purposes only.
+                Always consult a qualified doctor.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleDark() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('darkMode', isDark);
+    document.getElementById('darkBtn').textContent = isDark ? '☀️' : '🌙';
+}
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+        document.getElementById('darkBtn').textContent = '☀️';
+    }
+});
+</script>
+</body>
+</html>
