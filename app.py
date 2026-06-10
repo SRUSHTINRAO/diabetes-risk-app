@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, make_response
+from database import init_db, save_prediction, get_all_predictions, get_stats, clear_history
 import pickle
 import numpy as np
 from reportlab.lib.pagesizes import A4
@@ -11,6 +12,9 @@ from datetime import datetime
 import io
 
 app = Flask(__name__)
+
+# ── Initialize database ──────────────────────────────────────
+init_db()
 
 # ── Load models ──────────────────────────────────────────────
 with open('model.pkl', 'rb') as f:
@@ -486,8 +490,19 @@ def predict():
     }
     glucose_context_label = context_labels.get(glucose_context, 'Random / Unknown')
 
+    pred_label = "Diabetic" if prediction == 1 else "Not Diabetic"
+
+    # Save to database
+    save_prediction(
+        pred_type  = "Diabetes",
+        risk       = risk,
+        probability= round(probability, 1),
+        prediction = pred_label,
+        color      = color
+    )
+
     return render_template('result.html',
-        prediction=("Diabetic" if prediction == 1 else "Not Diabetic"),
+        prediction=pred_label,
         probability=round(probability, 1),
         risk=risk, color=color, advice=advice,
         features=features,
@@ -555,8 +570,19 @@ def heart_predict():
 
     interpretations = get_heart_interpretations(features)
 
+    pred_label = "Heart Disease" if prediction == 1 else "No Heart Disease"
+
+    # Save to database
+    save_prediction(
+        pred_type  = "Heart",
+        risk       = risk,
+        probability= round(probability, 1),
+        prediction = pred_label,
+        color      = color
+    )
+
     return render_template('heart_result.html',
-        prediction=("Heart Disease" if prediction == 1 else "No Heart Disease"),
+        prediction=pred_label,
         probability=round(probability, 1),
         risk=risk, color=color, advice=advice,
         features=features,
@@ -567,6 +593,25 @@ def heart_predict():
 @app.route('/tips')
 def tips():
     return render_template('tips.html')
+
+
+@app.route('/history')
+def history():
+    predictions = get_all_predictions()
+    stats       = get_stats()
+    return render_template('history.html',
+        predictions=predictions,
+        stats=stats
+    )
+
+
+@app.route('/clear-history', methods=['POST'])
+def clear_history_route():
+    clear_history()
+    return render_template('history.html',
+        predictions=[],
+        stats=get_stats()
+    )
 
 
 if __name__ == '__main__':
