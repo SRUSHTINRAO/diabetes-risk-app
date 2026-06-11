@@ -1,5 +1,6 @@
 import sqlite3
 from datetime import datetime
+import pytz
 
 DB_PATH = 'predictions.db'
 
@@ -28,7 +29,8 @@ def save_prediction(pred_type, risk, probability, prediction, color):
     """Save a prediction to the database."""
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    now = datetime.now()
+    IST = pytz.timezone('Asia/Kolkata')
+    now = datetime.now(IST)
     c.execute('''
         INSERT INTO predictions
         (date, time, type, risk, probability, prediction, color)
