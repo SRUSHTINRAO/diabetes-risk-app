@@ -25,6 +25,10 @@ const translations = {
         label_bmi:          "BMI",
         label_dpf:          "Diabetes Pedigree Function",
         label_age:          "Age",
+        label_gender:       "Gender",
+        label_female:       "Female",
+        label_male:         "Male",
+        comparison_title:   "Your Values vs Population Average",
 
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "BMI Calculator — auto-fills the BMI field below",
@@ -118,6 +122,10 @@ const translations = {
         label_bmi:          "ಬಿಎಂಐ",
         label_dpf:          "ಮಧುಮೇಹ ವಂಶಾವಳಿ ಕಾರ್ಯ",
         label_age:          "ವಯಸ್ಸು",
+        label_gender:       "ಲಿಂಗ",
+        label_female:       "ಮಹಿಳೆ",
+        label_male:         "ಪುರುಷ",
+        comparison_title:   "ನಿಮ್ಮ ಮೌಲ್ಯಗಳು vs ಜನಸಂಖ್ಯೆ ಸರಾಸರಿ",
 
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "ಬಿಎಂಐ ಕ್ಯಾಲ್ಕುಲೇಟರ್ — ಕೆಳಗಿನ ಬಿಎಂಐ ಕ್ಷೇತ್ರ ತುಂಬಿಸುತ್ತದೆ",
@@ -211,6 +219,10 @@ const translations = {
         label_bmi:          "बीएमआई",
         label_dpf:          "मधुमेह वंशावली कार्य",
         label_age:          "आयु",
+        label_gender:       "लिंग",
+        label_female:       "महिला",
+        label_male:         "पुरुष",
+        comparison_title:   "आपके मूल्य बनाम जनसंख्या औसत",
 
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "बीएमआई कैलकुलेटर — नीचे बीएमआई फ़ील्ड भरता है",

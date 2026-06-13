@@ -468,6 +468,7 @@ def predict():
 
     features = [float(values[f]) for f in DIABETES_RANGES.keys()]
     glucose_context = request.form.get('glucose_context', 'random')
+    gender = request.form.get('gender', 'female')
 
     prediction = diabetes_model.predict([features])[0]
     probability = diabetes_model.predict_proba([features])[0][1] * 100
@@ -508,7 +509,8 @@ def predict():
         features=features,
         interpretations=interpretations,
         glucose_context=glucose_context,
-        glucose_context_label=glucose_context_label
+        glucose_context_label=glucose_context_label,
+        gender=gender
     )
 
 
