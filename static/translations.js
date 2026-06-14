@@ -30,6 +30,35 @@ const translations = {
         label_male:         "Male",
         comparison_title:   "Your Values vs Population Average",
 
+        // ── Placeholders ─────────────────────────────────────
+        placeholder_pregnancies: "e.g. 2",
+        placeholder_glucose:     "e.g. 120",
+        placeholder_bp:          "e.g. 72",
+        placeholder_skin:        "e.g. 25",
+        placeholder_insulin:     "e.g. 80",
+        placeholder_bmi:         "e.g. 28.5",
+        placeholder_dpf:         "e.g. 0.350",
+        placeholder_age:         "e.g. 35",
+        placeholder_height:      "e.g. 165",
+        placeholder_weight:      "e.g. 70.5",
+
+        // ── Field hints ──────────────────────────────────────
+        hint_glucose:       "Normal: 70–99 mg/dL",
+        hint_bp:            "Normal: 60–80 mm Hg",
+        hint_skin:          "Normal: 10–40 mm",
+        hint_insulin:       "Normal: 16–166 µU/mL",
+        hint_bmi:           "Normal: 18.5–24.9",
+        hint_dpf:           "Genetic risk score (0.0–2.5)",
+        hint_gender:        "Used to compare your values to population averages",
+
+        // ── Misc ─────────────────────────────────────────────
+        error_alert:        "Please fix the highlighted fields before continuing.",
+        bmi_autofilled:     "(auto-filled below)",
+        bmi_underweight:    "Underweight",
+        bmi_normal:         "Normal weight",
+        bmi_overweight:     "Overweight",
+        bmi_obese:          "Obese",
+
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "BMI Calculator — auto-fills the BMI field below",
         bmi_height:         "Height (cm)",
@@ -126,6 +155,36 @@ const translations = {
         label_female:       "ಮಹಿಳೆ",
         label_male:         "ಪುರುಷ",
         comparison_title:   "ನಿಮ್ಮ ಮೌಲ್ಯಗಳು vs ಜನಸಂಖ್ಯೆ ಸರಾಸರಿ",
+
+        // ── Placeholders ─────────────────────────────────────
+        placeholder_pregnancies: "ಉದಾ. 2",
+        placeholder_glucose:     "ಉದಾ. 120",
+        placeholder_bp:          "ಉದಾ. 72",
+        placeholder_skin:        "ಉದಾ. 25",
+        placeholder_insulin:     "ಉದಾ. 80",
+        placeholder_bmi:         "ಉದಾ. 28.5",
+        placeholder_dpf:         "ಉದಾ. 0.350",
+        placeholder_age:         "ಉದಾ. 35",
+        placeholder_height:      "ಉದಾ. 165",
+        placeholder_weight:      "ಉದಾ. 70.5",
+
+        // ── Field hints ──────────────────────────────────────
+        hint_glucose:       "ಸಾಮಾನ್ಯ: 70–99 mg/dL",
+        hint_bp:            "ಸಾಮಾನ್ಯ: 60–80 mm Hg",
+        hint_skin:          "ಸಾಮಾನ್ಯ: 10–40 mm",
+        hint_insulin:       "ಸಾಮಾನ್ಯ: 16–166 µU/mL",
+        hint_bmi:           "ಸಾಮಾನ್ಯ: 18.5–24.9",
+        hint_dpf:           "ಜೆನೆಟಿಕ್ ಅಪಾಯ ಸ್ಕೋರ್ (0.0–2.5)",
+        hint_gender:        "ಜನಸಂಖ್ಯೆ ಸರಾಸರಿಗೆ ಹೋಲಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ",
+
+        // ── Misc ─────────────────────────────────────────────
+        error_alert:        "ಮುಂದುವರಿಸುವ ಮೊದಲು ಹೈಲೈಟ್ ಮಾಡಿದ ಕ್ಷೇತ್ರಗಳನ್ನು ಸರಿಪಡಿಸಿ.",
+        bmi_autofilled:     "(ಕೆಳಗೆ ಸ್ವಯಂ ತುಂಬಿಸಲಾಗಿದೆ)",
+        bmi_underweight:    "ಕಡಿಮೆ ತೂಕ",
+        bmi_normal:         "ಸಾಮಾನ್ಯ ತೂಕ",
+        bmi_overweight:     "ಅಧಿಕ ತೂಕ",
+        bmi_obese:          "ಬೊಜ್ಜು",
+
 
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "ಬಿಎಂಐ ಕ್ಯಾಲ್ಕುಲೇಟರ್ — ಕೆಳಗಿನ ಬಿಎಂಐ ಕ್ಷೇತ್ರ ತುಂಬಿಸುತ್ತದೆ",
@@ -224,6 +283,35 @@ const translations = {
         label_male:         "पुरुष",
         comparison_title:   "आपके मूल्य बनाम जनसंख्या औसत",
 
+        // ── Placeholders ─────────────────────────────────────
+        placeholder_pregnancies: "उदा. 2",
+        placeholder_glucose:     "उदा. 120",
+        placeholder_bp:          "उदा. 72",
+        placeholder_skin:        "उदा. 25",
+        placeholder_insulin:     "उदा. 80",
+        placeholder_bmi:         "उदा. 28.5",
+        placeholder_dpf:         "उदा. 0.350",
+        placeholder_age:         "उदा. 35",
+        placeholder_height:      "उदा. 165",
+        placeholder_weight:      "उदा. 70.5",
+
+        // ── Field hints ──────────────────────────────────────
+        hint_glucose:       "सामान्य: 70–99 mg/dL",
+        hint_bp:            "सामान्य: 60–80 mm Hg",
+        hint_skin:          "सामान्य: 10–40 mm",
+        hint_insulin:       "सामान्य: 16–166 µU/mL",
+        hint_bmi:           "सामान्य: 18.5–24.9",
+        hint_dpf:           "आनुवंशिक जोखिम स्कोर (0.0–2.5)",
+        hint_gender:        "जनसंख्या औसत से तुलना के लिए उपयोग किया जाता है",
+
+        // ── Misc ─────────────────────────────────────────────
+        error_alert:        "जारी रखने से पहले हाइलाइट किए गए फ़ील्ड ठीक करें।",
+        bmi_autofilled:     "(नीचे स्वतः भरा गया)",
+        bmi_underweight:    "कम वजन",
+        bmi_normal:         "सामान्य वजन",
+        bmi_overweight:     "अधिक वजन",
+        bmi_obese:          "मोटापा",
+
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "बीएमआई कैलकुलेटर — नीचे बीएमआई फ़ील्ड भरता है",
         bmi_height:         "ऊंचाई (सेमी)",
@@ -318,6 +406,15 @@ function applyLanguage(lang) {
             : 'rgba(255,255,255,0.2)';
         btn.style.fontWeight = btn.dataset.lang === lang ? '700' : '400';
     });
+
+    // Re-render BMI widget result in the new language (if present)
+    if (typeof calculateBMI === 'function') {
+        const h = document.getElementById('height_input');
+        const w = document.getElementById('weight_input');
+        if (h && w && h.value && w.value) {
+            calculateBMI();
+        }
+    }
 }
 
 function initLanguage() {

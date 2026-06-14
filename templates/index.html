@@ -173,7 +173,7 @@
 
                     {% if errors %}
                     <div class="alert alert-danger">
-                        ⚠️ Please fix the highlighted fields before continuing.
+                        ⚠️ <span data-i18n="error_alert">Please fix the highlighted fields before continuing.</span>
                     </div>
                     {% endif %}
 
@@ -187,28 +187,35 @@
                             </p>
                             <div class="row g-2">
                                 <div class="col-5">
-                                    <label class="form-label" style="font-size:0.85rem;">
+                                    <label class="form-label" style="font-size:0.85rem;"
+                                           data-i18n="bmi_height">
                                         Height (cm)
                                     </label>
                                     <input type="number" id="height_input"
                                         class="form-control"
-                                        placeholder="e.g. 165" min="100" max="250"
+                                        placeholder="e.g. 165"
+                                        data-i18n-placeholder="placeholder_height"
+                                        min="100" max="250"
                                         oninput="calculateBMI()">
                                 </div>
                                 <div class="col-5">
-                                    <label class="form-label" style="font-size:0.85rem;">
+                                    <label class="form-label" style="font-size:0.85rem;"
+                                           data-i18n="bmi_weight">
                                         Weight (kg)
                                     </label>
                                     <input type="number" id="weight_input"
                                         class="form-control"
-                                        placeholder="e.g. 70.5" min="20" max="300"
+                                        placeholder="e.g. 70.5"
+                                        data-i18n-placeholder="placeholder_weight"
+                                        min="20" max="300"
                                         step="0.1" oninput="calculateBMI()">
                                 </div>
                                 <div class="col-2 d-flex align-items-end">
                                     <button type="button" onclick="clearBMI()"
                                         style="background:#e0e0e0; border:none;
                                                border-radius:8px; padding:8px;
-                                               width:100%; font-size:0.8rem;">
+                                               width:100%; font-size:0.8rem;"
+                                        data-i18n="bmi_clear">
                                         Clear
                                     </button>
                                 </div>
@@ -227,7 +234,9 @@
                                        data-i18n="label_pregnancies">Pregnancies</label>
                                 <input type="number" name="pregnancies"
                                     class="form-control {% if errors.pregnancies %}field-error{% endif %}"
-                                    placeholder="e.g. 2" value="{{ values.pregnancies }}">
+                                    placeholder="e.g. 2"
+                                    data-i18n-placeholder="placeholder_pregnancies"
+                                    value="{{ values.pregnancies }}">
                                 {% if errors.pregnancies %}
                                 <div class="error-msg">⚠️ {{ errors.pregnancies }}</div>
                                 {% endif %}
@@ -239,8 +248,11 @@
                                        data-i18n="label_glucose">Glucose Level</label>
                                 <input type="number" name="glucose"
                                     class="form-control {% if errors.glucose %}field-error{% endif %}"
-                                    placeholder="e.g. 120" value="{{ values.glucose }}">
-                                <small class="text-muted">Normal: 70–99 mg/dL</small>
+                                    placeholder="e.g. 120"
+                                    data-i18n-placeholder="placeholder_glucose"
+                                    value="{{ values.glucose }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_glucose">Normal: 70–99 mg/dL</small>
                                 {% if errors.glucose %}
                                 <div class="error-msg">⚠️ {{ errors.glucose }}</div>
                                 {% endif %}
@@ -248,7 +260,7 @@
                                 <!-- Glucose Context Toggle -->
                                 <div class="glucose-context">
                                     <small class="fw-bold glucose-context-title">
-                                        📋 When was this measured?
+                                        📋 <span data-i18n="glucose_when">When was this measured?</span>
                                     </small>
                                     <div style="margin-top:6px;">
                                         <div class="form-check">
@@ -256,7 +268,7 @@
                                                 name="glucose_context" id="gc_fasting"
                                                 value="fasting">
                                             <label class="form-check-label" for="gc_fasting">
-                                                🌙 Fasting (8+ hours without food)
+                                                🌙 <span data-i18n="glucose_fasting">Fasting (8+ hours without food)</span>
                                             </label>
                                         </div>
                                         <div class="form-check">
@@ -264,7 +276,7 @@
                                                 name="glucose_context" id="gc_after_meal"
                                                 value="after_meal">
                                             <label class="form-check-label" for="gc_after_meal">
-                                                🍽️ After a meal
+                                                🍽️ <span data-i18n="glucose_after_meal">After a meal</span>
                                             </label>
                                         </div>
                                         <div class="form-check">
@@ -272,7 +284,7 @@
                                                 name="glucose_context" id="gc_random"
                                                 value="random" checked>
                                             <label class="form-check-label" for="gc_random">
-                                                ❓ Random / I don't know
+                                                ❓ <span data-i18n="glucose_random">Random / I don't know</span>
                                             </label>
                                         </div>
                                     </div>
@@ -285,8 +297,11 @@
                                        data-i18n="label_bp">Blood Pressure</label>
                                 <input type="number" name="bloodpressure"
                                     class="form-control {% if errors.bloodpressure %}field-error{% endif %}"
-                                    placeholder="e.g. 72" value="{{ values.bloodpressure }}">
-                                <small class="text-muted">Normal: 60–80 mm Hg</small>
+                                    placeholder="e.g. 72"
+                                    data-i18n-placeholder="placeholder_bp"
+                                    value="{{ values.bloodpressure }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_bp">Normal: 60–80 mm Hg</small>
                                 {% if errors.bloodpressure %}
                                 <div class="error-msg">⚠️ {{ errors.bloodpressure }}</div>
                                 {% endif %}
@@ -298,8 +313,11 @@
                                        data-i18n="label_skin">Skin Thickness</label>
                                 <input type="number" name="skinthickness"
                                     class="form-control {% if errors.skinthickness %}field-error{% endif %}"
-                                    placeholder="e.g. 25" value="{{ values.skinthickness }}">
-                                <small class="text-muted">Normal: 10–40 mm</small>
+                                    placeholder="e.g. 25"
+                                    data-i18n-placeholder="placeholder_skin"
+                                    value="{{ values.skinthickness }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_skin">Normal: 10–40 mm</small>
                                 {% if errors.skinthickness %}
                                 <div class="error-msg">⚠️ {{ errors.skinthickness }}</div>
                                 {% endif %}
@@ -311,8 +329,11 @@
                                        data-i18n="label_insulin">Insulin Level</label>
                                 <input type="number" name="insulin"
                                     class="form-control {% if errors.insulin %}field-error{% endif %}"
-                                    placeholder="e.g. 80" value="{{ values.insulin }}">
-                                <small class="text-muted">Normal: 16–166 µU/mL</small>
+                                    placeholder="e.g. 80"
+                                    data-i18n-placeholder="placeholder_insulin"
+                                    value="{{ values.insulin }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_insulin">Normal: 16–166 µU/mL</small>
                                 {% if errors.insulin %}
                                 <div class="error-msg">⚠️ {{ errors.insulin }}</div>
                                 {% endif %}
@@ -324,8 +345,11 @@
                                        data-i18n="label_bmi">BMI</label>
                                 <input type="number" step="0.1" name="bmi"
                                     class="form-control {% if errors.bmi %}field-error{% endif %}"
-                                    placeholder="e.g. 28.5" value="{{ values.bmi }}">
-                                <small class="text-muted">Normal: 18.5–24.9</small>
+                                    placeholder="e.g. 28.5"
+                                    data-i18n-placeholder="placeholder_bmi"
+                                    value="{{ values.bmi }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_bmi">Normal: 18.5–24.9</small>
                                 {% if errors.bmi %}
                                 <div class="error-msg">⚠️ {{ errors.bmi }}</div>
                                 {% endif %}
@@ -338,8 +362,11 @@
                                        data-i18n="label_dpf">Diabetes Pedigree Function</label>
                                 <input type="number" step="0.001" name="dpf"
                                     class="form-control {% if errors.dpf %}field-error{% endif %}"
-                                    placeholder="e.g. 0.350" value="{{ values.dpf }}">
-                                <small class="text-muted">Genetic risk score (0.0–2.5)</small>
+                                    placeholder="e.g. 0.350"
+                                    data-i18n-placeholder="placeholder_dpf"
+                                    value="{{ values.dpf }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_dpf">Genetic risk score (0.0–2.5)</small>
                                 {% if errors.dpf %}
                                 <div class="error-msg">⚠️ {{ errors.dpf }}</div>
                                 {% endif %}
@@ -351,7 +378,9 @@
                                        data-i18n="label_age">Age</label>
                                 <input type="number" name="age"
                                     class="form-control {% if errors.age %}field-error{% endif %}"
-                                    placeholder="e.g. 35" value="{{ values.age }}">
+                                    placeholder="e.g. 35"
+                                    data-i18n-placeholder="placeholder_age"
+                                    value="{{ values.age }}">
                                 {% if errors.age %}
                                 <div class="error-msg">⚠️ {{ errors.age }}</div>
                                 {% endif %}
@@ -367,17 +396,20 @@
                                            color:var(--input-text);
                                            border-color:var(--input-border);">
                                     <option value="female"
+                                        data-i18n="label_female"
                                         {% if values.gender == 'female' or not values.gender %}
                                         selected{% endif %}>
                                         Female
                                     </option>
                                     <option value="male"
+                                        data-i18n="label_male"
                                         {% if values.gender == 'male' %}
                                         selected{% endif %}>
                                         Male
                                     </option>
                                 </select>
-                                <small class="text-muted">
+                                <small class="text-muted"
+                                       data-i18n="hint_gender">
                                     Used to compare your values to population averages
                                 </small>
                             </div>
@@ -389,9 +421,9 @@
                     </form>
                 </div>
             </div>
-            <p class="text-center text-muted mt-3" style="font-size:0.85rem;">
-                ⚠️ This tool is for educational purposes only.
-                Always consult a qualified doctor.
+           <p class="text-center text-muted mt-3" style="font-size:0.85rem;">
+                ⚠️ <span data-i18n="educational_note">This tool is for educational purposes only.
+                Always consult a qualified doctor.</span>
             </p>
         </div>
     </div>
@@ -429,11 +461,17 @@ function calculateBMI() {
     const bmi        = weight / (heightM * heightM);
     const bmiRounded = Math.round(bmi * 10) / 10;
 
-    let category, color, emoji;
-    if      (bmi < 18.5) { category = 'Underweight';   color = '#1565c0'; emoji = '🔵'; }
-    else if (bmi < 23)   { category = 'Normal weight';  color = '#2e7d32'; emoji = '🟢'; }
-    else if (bmi < 27.5) { category = 'Overweight';     color = '#e65100'; emoji = '🟡'; }
-    else                 { category = 'Obese';           color = '#c62828'; emoji = '🔴'; }
+    const lang = localStorage.getItem('language') || 'en';
+    const t    = translations[lang];
+
+    let categoryKey, color, emoji;
+    if      (bmi < 18.5) { categoryKey = 'bmi_underweight'; color = '#1565c0'; emoji = '🔵'; }
+    else if (bmi < 23)   { categoryKey = 'bmi_normal';      color = '#2e7d32'; emoji = '🟢'; }
+    else if (bmi < 27.5) { categoryKey = 'bmi_overweight';  color = '#e65100'; emoji = '🟡'; }
+    else                 { categoryKey = 'bmi_obese';       color = '#c62828'; emoji = '🔴'; }
+
+    const category       = t[categoryKey]      || categoryKey;
+    const autofilledText = t['bmi_autofilled']  || '(auto-filled below)';
 
     const bmiInput = document.querySelector('input[name="bmi"]');
     if (bmiInput) bmiInput.value = bmiRounded;
@@ -441,7 +479,7 @@ function calculateBMI() {
     resultDiv.innerHTML = `
         ${emoji} <strong style="color:var(--text);">BMI: ${bmiRounded}</strong>
         <span style="color:${color}; font-weight:600;"> — ${category}</span>
-        <span style="color:var(--text-muted); font-size:0.82rem; margin-left:8px;">(auto-filled below)</span>
+        <span style="color:var(--text-muted); font-size:0.82rem; margin-left:8px;">${autofilledText}</span>
     `;
 }
 
