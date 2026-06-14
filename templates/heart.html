@@ -140,7 +140,7 @@
 
                     {% if errors %}
                     <div class="alert alert-danger">
-                        ⚠️ Please fix the highlighted fields before continuing.
+                        ⚠️ <span data-i18n="error_alert">Please fix the highlighted fields before continuing.</span>
                     </div>
                     {% endif %}
 
@@ -149,10 +149,13 @@
 
                             <!-- Age -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Age</label>
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_heart_age">Age</label>
                                 <input type="number" name="age"
                                     class="form-control {% if errors.age %}field-error{% endif %}"
-                                    placeholder="e.g. 55" value="{{ values.age }}">
+                                    placeholder="e.g. 55"
+                                    data-i18n-placeholder="placeholder_heart_age"
+                                    value="{{ values.age }}">
                                 {% if errors.age %}
                                 <div class="error-msg">⚠️ {{ errors.age }}</div>
                                 {% endif %}
@@ -160,18 +163,22 @@
 
                             <!-- Sex -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Sex</label>
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_sex">Sex</label>
                                 <select name="sex"
                                     class="form-select {% if errors.sex %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.sex %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="1"
+                                        data-i18n="label_male"
                                         {% if values.sex == '1' %}selected{% endif %}>
                                         Male
                                     </option>
                                     <option value="0"
+                                        data-i18n="label_female"
                                         {% if values.sex == '0' %}selected{% endif %}>
                                         Female
                                     </option>
@@ -183,31 +190,38 @@
 
                             <!-- Chest Pain Type -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Chest Pain Type</label>
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_cp">Chest Pain Type</label>
                                 <select name="cp"
                                     class="form-select {% if errors.cp %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.cp %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="0"
+                                        data-i18n="cp_0"
                                         {% if values.cp == '0' %}selected{% endif %}>
                                         0 — Typical Angina
                                     </option>
                                     <option value="1"
+                                        data-i18n="cp_1"
                                         {% if values.cp == '1' %}selected{% endif %}>
                                         1 — Atypical Angina
                                     </option>
                                     <option value="2"
+                                        data-i18n="cp_2"
                                         {% if values.cp == '2' %}selected{% endif %}>
                                         2 — Non-Anginal Pain
                                     </option>
                                     <option value="3"
+                                        data-i18n="cp_3"
                                         {% if values.cp == '3' %}selected{% endif %}>
                                         3 — Asymptomatic
                                     </option>
                                 </select>
-                                <div class="info-box">
+                                <div class="info-box"
+                                     data-i18n="hint_cp">
                                     Typical Angina = chest pain from heart.
                                     Asymptomatic = no chest pain (can still have disease)
                                 </div>
@@ -218,13 +232,17 @@
 
                             <!-- Resting BP -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_trestbps">
                                     Resting Blood Pressure
                                 </label>
                                 <input type="number" name="trestbps"
                                     class="form-control {% if errors.trestbps %}field-error{% endif %}"
-                                    placeholder="e.g. 120" value="{{ values.trestbps }}">
-                                <small class="text-muted">Normal: below 120 mm Hg</small>
+                                    placeholder="e.g. 120"
+                                    data-i18n-placeholder="placeholder_trestbps"
+                                    value="{{ values.trestbps }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_trestbps">Normal: below 120 mm Hg</small>
                                 {% if errors.trestbps %}
                                 <div class="error-msg">⚠️ {{ errors.trestbps }}</div>
                                 {% endif %}
@@ -232,13 +250,17 @@
 
                             <!-- Cholesterol -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_chol">
                                     Cholesterol
                                 </label>
                                 <input type="number" name="chol"
                                     class="form-control {% if errors.chol %}field-error{% endif %}"
-                                    placeholder="e.g. 200" value="{{ values.chol }}">
-                                <small class="text-muted">Normal: below 200 mg/dL</small>
+                                    placeholder="e.g. 200"
+                                    data-i18n-placeholder="placeholder_chol"
+                                    value="{{ values.chol }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_chol">Normal: below 200 mg/dL</small>
                                 {% if errors.chol %}
                                 <div class="error-msg">⚠️ {{ errors.chol }}</div>
                                 {% endif %}
@@ -246,20 +268,24 @@
 
                             <!-- Fasting Blood Sugar -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_fbs">
                                     Fasting Blood Sugar > 120 mg/dL?
                                 </label>
                                 <select name="fbs"
                                     class="form-select {% if errors.fbs %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.fbs %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="1"
+                                        data-i18n="option_yes"
                                         {% if values.fbs == '1' %}selected{% endif %}>
                                         Yes
                                     </option>
                                     <option value="0"
+                                        data-i18n="option_no"
                                         {% if values.fbs == '0' %}selected{% endif %}>
                                         No
                                     </option>
@@ -271,24 +297,29 @@
 
                             <!-- Resting ECG -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_restecg">
                                     Resting ECG Results
                                 </label>
                                 <select name="restecg"
                                     class="form-select {% if errors.restecg %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.restecg %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="0"
+                                        data-i18n="restecg_0"
                                         {% if values.restecg == '0' %}selected{% endif %}>
                                         0 — Normal
                                     </option>
                                     <option value="1"
+                                        data-i18n="restecg_1"
                                         {% if values.restecg == '1' %}selected{% endif %}>
                                         1 — ST-T Wave Abnormality
                                     </option>
                                     <option value="2"
+                                        data-i18n="restecg_2"
                                         {% if values.restecg == '2' %}selected{% endif %}>
                                         2 — Left Ventricular Hypertrophy
                                     </option>
@@ -300,13 +331,17 @@
 
                             <!-- Max Heart Rate -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_thalach">
                                     Max Heart Rate Achieved
                                 </label>
                                 <input type="number" name="thalach"
                                     class="form-control {% if errors.thalach %}field-error{% endif %}"
-                                    placeholder="e.g. 150" value="{{ values.thalach }}">
-                                <small class="text-muted">Typical range: 60–202 bpm</small>
+                                    placeholder="e.g. 150"
+                                    data-i18n-placeholder="placeholder_thalach"
+                                    value="{{ values.thalach }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_thalach">Typical range: 60–202 bpm</small>
                                 {% if errors.thalach %}
                                 <div class="error-msg">⚠️ {{ errors.thalach }}</div>
                                 {% endif %}
@@ -314,25 +349,30 @@
 
                             <!-- Exercise Angina -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_exang">
                                     Exercise Induced Angina?
                                 </label>
                                 <select name="exang"
                                     class="form-select {% if errors.exang %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.exang %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="1"
+                                        data-i18n="option_yes"
                                         {% if values.exang == '1' %}selected{% endif %}>
                                         Yes
                                     </option>
                                     <option value="0"
+                                        data-i18n="option_no"
                                         {% if values.exang == '0' %}selected{% endif %}>
                                         No
                                     </option>
                                 </select>
-                                <div class="info-box">
+                                <div class="info-box"
+                                     data-i18n="hint_exang">
                                     Chest pain that occurs during exercise or physical activity
                                 </div>
                                 {% if errors.exang %}
@@ -342,13 +382,17 @@
 
                             <!-- ST Depression -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_oldpeak">
                                     ST Depression (Oldpeak)
                                 </label>
                                 <input type="number" step="0.1" name="oldpeak"
                                     class="form-control {% if errors.oldpeak %}field-error{% endif %}"
-                                    placeholder="e.g. 1.0" value="{{ values.oldpeak }}">
-                                <small class="text-muted">
+                                    placeholder="e.g. 1.0"
+                                    data-i18n-placeholder="placeholder_oldpeak"
+                                    value="{{ values.oldpeak }}">
+                                <small class="text-muted"
+                                       data-i18n="hint_oldpeak">
                                     ST depression induced by exercise. Normal: 0–0.5
                                 </small>
                                 {% if errors.oldpeak %}
@@ -358,24 +402,29 @@
 
                             <!-- Slope -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_slope">
                                     Slope of Peak Exercise ST
                                 </label>
                                 <select name="slope"
                                     class="form-select {% if errors.slope %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.slope %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="0"
+                                        data-i18n="slope_0"
                                         {% if values.slope == '0' %}selected{% endif %}>
                                         0 — Upsloping
                                     </option>
                                     <option value="1"
+                                        data-i18n="slope_1"
                                         {% if values.slope == '1' %}selected{% endif %}>
                                         1 — Flat
                                     </option>
                                     <option value="2"
+                                        data-i18n="slope_2"
                                         {% if values.slope == '2' %}selected{% endif %}>
                                         2 — Downsloping
                                     </option>
@@ -387,12 +436,14 @@
 
                             <!-- Major Vessels -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_ca">
                                     Number of Major Vessels (0–3)
                                 </label>
                                 <select name="ca"
                                     class="form-select {% if errors.ca %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.ca %}selected{% endif %}>
                                         Select...
                                     </option>
@@ -413,7 +464,8 @@
                                         3
                                     </option>
                                 </select>
-                                <div class="info-box">
+                                <div class="info-box"
+                                     data-i18n="hint_ca">
                                     Number of major vessels colored by fluoroscopy (0 = best)
                                 </div>
                                 {% if errors.ca %}
@@ -423,33 +475,40 @@
 
                             <!-- Thal -->
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">
+                                <label class="form-label fw-bold"
+                                       data-i18n="label_thal">
                                     Thalassemia Type
                                 </label>
                                 <select name="thal"
                                     class="form-select {% if errors.thal %}field-error{% endif %}">
                                     <option value="" disabled
+                                        data-i18n="select_option"
                                         {% if not values.thal %}selected{% endif %}>
                                         Select...
                                     </option>
                                     <option value="0"
+                                        data-i18n="thal_0"
                                         {% if values.thal == '0' %}selected{% endif %}>
                                         0 — Normal
                                     </option>
                                     <option value="1"
+                                        data-i18n="thal_1"
                                         {% if values.thal == '1' %}selected{% endif %}>
                                         1 — Fixed Defect
                                     </option>
                                     <option value="2"
+                                        data-i18n="thal_2"
                                         {% if values.thal == '2' %}selected{% endif %}>
                                         2 — Reversible Defect
                                     </option>
                                     <option value="3"
+                                        data-i18n="thal_3"
                                         {% if values.thal == '3' %}selected{% endif %}>
                                         3 — Unknown
                                     </option>
                                 </select>
-                                <div class="info-box">
+                                <div class="info-box"
+                                     data-i18n="hint_thal">
                                     Blood disorder affecting hemoglobin.
                                     Reversible defect = highest risk
                                 </div>
@@ -466,8 +525,8 @@
                 </div>
             </div>
             <p class="text-center text-muted mt-3" style="font-size:0.85rem;">
-                ⚠️ This tool is for educational purposes only.
-                Always consult a qualified doctor.
+                ⚠️ <span data-i18n="educational_note">This tool is for educational purposes only.
+                Always consult a qualified doctor.</span>
             </p>
         </div>
     </div>

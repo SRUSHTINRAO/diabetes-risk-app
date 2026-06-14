@@ -59,6 +59,68 @@ const translations = {
         bmi_overweight:     "Overweight",
         bmi_obese:          "Obese",
 
+        // ── Heart form labels ─────────────────────────────────
+        label_heart_age:    "Age",
+        label_sex:          "Sex",
+        label_cp:           "Chest Pain Type",
+        label_trestbps:     "Resting Blood Pressure",
+        label_chol:         "Cholesterol",
+        label_fbs:          "Fasting Blood Sugar > 120 mg/dL?",
+        label_restecg:      "Resting ECG Results",
+        label_thalach:      "Max Heart Rate Achieved",
+        label_exang:        "Exercise Induced Angina?",
+        label_oldpeak:      "ST Depression (Oldpeak)",
+        label_slope:        "Slope of Peak Exercise ST",
+        label_ca:           "Number of Major Vessels (0–3)",
+        label_thal:         "Thalassemia Type",
+
+        // ── Heart placeholders ───────────────────────────────
+        placeholder_heart_age: "e.g. 55",
+        placeholder_trestbps:  "e.g. 120",
+        placeholder_chol:      "e.g. 200",
+        placeholder_thalach:   "e.g. 150",
+        placeholder_oldpeak:   "e.g. 1.0",
+
+        // ── Heart hints ──────────────────────────────────────
+        hint_trestbps:      "Normal: below 120 mm Hg",
+        hint_chol:          "Normal: below 200 mg/dL",
+        hint_thalach:       "Typical range: 60–202 bpm",
+        hint_oldpeak:       "ST depression induced by exercise. Normal: 0–0.5",
+        hint_cp:            "Typical Angina = chest pain from heart. Asymptomatic = no chest pain (can still have disease)",
+        hint_exang:         "Chest pain that occurs during exercise or physical activity",
+        hint_ca:            "Number of major vessels colored by fluoroscopy (0 = best)",
+        hint_thal:          "Blood disorder affecting hemoglobin. Reversible defect = highest risk",
+
+        // ── Select option ────────────────────────────────────
+        select_option:      "Select...",
+
+        // ── Yes/No ───────────────────────────────────────────
+        option_yes:         "Yes",
+        option_no:          "No",
+
+        // ── Chest pain options ───────────────────────────────
+        cp_0:               "0 — Typical Angina",
+        cp_1:               "1 — Atypical Angina",
+        cp_2:               "2 — Non-Anginal Pain",
+        cp_3:               "3 — Asymptomatic",
+
+        // ── Resting ECG options ──────────────────────────────
+        restecg_0:          "0 — Normal",
+        restecg_1:          "1 — ST-T Wave Abnormality",
+        restecg_2:          "2 — Left Ventricular Hypertrophy",
+
+        // ── Slope options ────────────────────────────────────
+        slope_0:            "0 — Upsloping",
+        slope_1:            "1 — Flat",
+        slope_2:            "2 — Downsloping",
+
+        // ── Thal options ─────────────────────────────────────
+        thal_0:             "0 — Normal",
+        thal_1:             "1 — Fixed Defect",
+        thal_2:             "2 — Reversible Defect",
+        thal_3:             "3 — Unknown",
+
+
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "BMI Calculator — auto-fills the BMI field below",
         bmi_height:         "Height (cm)",
@@ -184,6 +246,67 @@ const translations = {
         bmi_normal:         "ಸಾಮಾನ್ಯ ತೂಕ",
         bmi_overweight:     "ಅಧಿಕ ತೂಕ",
         bmi_obese:          "ಬೊಜ್ಜು",
+
+        // ── Heart form labels ─────────────────────────────────
+        label_heart_age:    "ವಯಸ್ಸು",
+        label_sex:          "ಲಿಂಗ",
+        label_cp:           "ಎದೆ ನೋವಿನ ಪ್ರಕಾರ",
+        label_trestbps:     "ವಿಶ್ರಾಂತಿ ರಕ್ತದೊತ್ತಡ",
+        label_chol:         "ಕೊಲೆಸ್ಟ್ರಾಲ್",
+        label_fbs:          "ಉಪವಾಸ ರಕ್ತದ ಸಕ್ಕರೆ > 120 mg/dL?",
+        label_restecg:      "ವಿಶ್ರಾಂತಿ ECG ಫಲಿತಾಂಶಗಳು",
+        label_thalach:      "ಗರಿಷ್ಠ ಹೃದಯ ಬಡಿತ",
+        label_exang:        "ವ್ಯಾಯಾಮದಿಂದ ಎದೆ ನೋವು?",
+        label_oldpeak:      "ST ಖಿನ್ನತೆ (Oldpeak)",
+        label_slope:        "ಗರಿಷ್ಠ ವ್ಯಾಯಾಮ ST ಯ ಇಳಿಜಾರು",
+        label_ca:           "ಮುಖ್ಯ ರಕ್ತನಾಳಗಳ ಸಂಖ್ಯೆ (0–3)",
+        label_thal:         "ಥಲಸ್ಸೆಮಿಯಾ ಪ್ರಕಾರ",
+
+        // ── Heart placeholders ───────────────────────────────
+        placeholder_heart_age: "ಉದಾ. 55",
+        placeholder_trestbps:  "ಉದಾ. 120",
+        placeholder_chol:      "ಉದಾ. 200",
+        placeholder_thalach:   "ಉದಾ. 150",
+        placeholder_oldpeak:   "ಉದಾ. 1.0",
+
+        // ── Heart hints ──────────────────────────────────────
+        hint_trestbps:      "ಸಾಮಾನ್ಯ: 120 mm Hg ಗಿಂತ ಕಡಿಮೆ",
+        hint_chol:          "ಸಾಮಾನ್ಯ: 200 mg/dL ಗಿಂತ ಕಡಿಮೆ",
+        hint_thalach:       "ಸಾಮಾನ್ಯ ವ್ಯಾಪ್ತಿ: 60–202 bpm",
+        hint_oldpeak:       "ವ್ಯಾಯಾಮದಿಂದ ST ಖಿನ್ನತೆ. ಸಾಮಾನ್ಯ: 0–0.5",
+        hint_cp:            "ಟಿಪಿಕಲ್ ಆಂಜಿನಾ = ಹೃದಯದಿಂದ ಎದೆ ನೋವು. ಅಸಿಂಪ್ಟೊಮ್ಯಾಟಿಕ್ = ಎದೆ ನೋವು ಇಲ್ಲ (ಆದರೂ ರೋಗ ಇರಬಹುದು)",
+        hint_exang:         "ವ್ಯಾಯಾಮ ಅಥವಾ ದೈಹಿಕ ಚಟುವಟಿಕೆಯ ಸಮಯದಲ್ಲಿ ಎದೆ ನೋವು",
+        hint_ca:            "ಫ್ಲೋರೋಸ್ಕೋಪಿಯಿಂದ ಬಣ್ಣ ಬಂದ ಮುಖ್ಯ ರಕ್ತನಾಳಗಳ ಸಂಖ್ಯೆ (0 = ಉತ್ತಮ)",
+        hint_thal:          "ಹಿಮೋಗ್ಲೋಬಿನ್ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವ ರಕ್ತ ಅಸ್ವಸ್ಥತೆ. ರಿವರ್ಸಿಬಲ್ ಡಿಫೆಕ್ಟ್ = ಅತಿ ಹೆಚ್ಚು ಅಪಾಯ",
+
+        // ── Select option ────────────────────────────────────
+        select_option:      "ಆಯ್ಕೆಮಾಡಿ...",
+
+        // ── Yes/No ───────────────────────────────────────────
+        option_yes:         "ಹೌದು",
+        option_no:          "ಇಲ್ಲ",
+
+        // ── Chest pain options ───────────────────────────────
+        cp_0:               "0 — ಟಿಪಿಕಲ್ ಆಂಜಿನಾ",
+        cp_1:               "1 — ಅಟಿಪಿಕಲ್ ಆಂಜಿನಾ",
+        cp_2:               "2 — ನಾನ್-ಆಂಜಿನಲ್ ನೋವು",
+        cp_3:               "3 — ಅಸಿಂಪ್ಟೊಮ್ಯಾಟಿಕ್",
+
+        // ── Resting ECG options ──────────────────────────────
+        restecg_0:          "0 — ಸಾಮಾನ್ಯ",
+        restecg_1:          "1 — ST-T ತರಂಗ ಅಸಾಮಾನ್ಯತೆ",
+        restecg_2:          "2 — ಎಡ ವೆಂಟ್ರಿಕ್ಯುಲರ್ ಹೈಪರ್ಟ್ರೋಫಿ",
+
+        // ── Slope options ────────────────────────────────────
+        slope_0:            "0 — ಮೇಲ್ಮುಖ ಇಳಿಜಾರು",
+        slope_1:            "1 — ಸಮತಟ್ಟು",
+        slope_2:            "2 — ಕೆಳಮುಖ ಇಳಿಜಾರು",
+
+        // ── Thal options ─────────────────────────────────────
+        thal_0:             "0 — ಸಾಮಾನ್ಯ",
+        thal_1:             "1 — ಸ್ಥಿರ ಡಿಫೆಕ್ಟ್",
+        thal_2:             "2 — ರಿವರ್ಸಿಬಲ್ ಡಿಫೆಕ್ಟ್",
+        thal_3:             "3 — ಅಜ್ಞಾತ",
 
 
         // ── BMI Calculator ───────────────────────────────────
@@ -311,6 +434,67 @@ const translations = {
         bmi_normal:         "सामान्य वजन",
         bmi_overweight:     "अधिक वजन",
         bmi_obese:          "मोटापा",
+
+        // ── Heart form labels ─────────────────────────────────
+        label_heart_age:    "आयु",
+        label_sex:          "लिंग",
+        label_cp:           "सीने में दर्द का प्रकार",
+        label_trestbps:     "विश्राम रक्तचाप",
+        label_chol:         "कोलेस्ट्रॉल",
+        label_fbs:          "उपवास रक्त शर्करा > 120 mg/dL?",
+        label_restecg:      "विश्राम ECG परिणाम",
+        label_thalach:      "अधिकतम हृदय गति",
+        label_exang:        "व्यायाम से सीने में दर्द?",
+        label_oldpeak:      "ST अवसाद (Oldpeak)",
+        label_slope:        "पीक एक्सरसाइज ST का ढलान",
+        label_ca:           "मुख्य वाहिकाओं की संख्या (0–3)",
+        label_thal:         "थैलेसीमिया प्रकार",
+
+        // ── Heart placeholders ───────────────────────────────
+        placeholder_heart_age: "उदा. 55",
+        placeholder_trestbps:  "उदा. 120",
+        placeholder_chol:      "उदा. 200",
+        placeholder_thalach:   "उदा. 150",
+        placeholder_oldpeak:   "उदा. 1.0",
+
+        // ── Heart hints ──────────────────────────────────────
+        hint_trestbps:      "सामान्य: 120 mm Hg से कम",
+        hint_chol:          "सामान्य: 200 mg/dL से कम",
+        hint_thalach:       "सामान्य सीमा: 60–202 bpm",
+        hint_oldpeak:       "व्यायाम से प्रेरित ST अवसाद। सामान्य: 0–0.5",
+        hint_cp:            "टिपिकल एनजाइना = हृदय से सीने में दर्द। एसिम्प्टोमैटिक = सीने में दर्द नहीं (फिर भी रोग हो सकता है)",
+        hint_exang:         "व्यायाम या शारीरिक गतिविधि के दौरान होने वाला सीने का दर्द",
+        hint_ca:            "फ्लोरोस्कोपी द्वारा रंगीन मुख्य वाहिकाओं की संख्या (0 = सर्वोत्तम)",
+        hint_thal:          "हीमोग्लोबिन को प्रभावित करने वाला रक्त विकार। रिवर्सिबल डिफेक्ट = सर्वाधिक जोखिम",
+
+        // ── Select option ────────────────────────────────────
+        select_option:      "चुनें...",
+
+        // ── Yes/No ───────────────────────────────────────────
+        option_yes:         "हां",
+        option_no:          "नहीं",
+
+        // ── Chest pain options ───────────────────────────────
+        cp_0:               "0 — टिपिकल एनजाइना",
+        cp_1:               "1 — एटिपिकल एनजाइना",
+        cp_2:               "2 — नॉन-एनजाइनल दर्द",
+        cp_3:               "3 — एसिम्प्टोमैटिक",
+
+        // ── Resting ECG options ──────────────────────────────
+        restecg_0:          "0 — सामान्य",
+        restecg_1:          "1 — ST-T वेव असामान्यता",
+        restecg_2:          "2 — लेफ्ट वेंट्रिकुलर हाइपरट्रॉफी",
+
+        // ── Slope options ────────────────────────────────────
+        slope_0:            "0 — ऊर्ध्व ढलान",
+        slope_1:            "1 — समतल",
+        slope_2:            "2 — अधोमुख ढलान",
+
+        // ── Thal options ─────────────────────────────────────
+        thal_0:             "0 — सामान्य",
+        thal_1:             "1 — स्थिर डिफेक्ट",
+        thal_2:             "2 — रिवर्सिबल डिफेक्ट",
+        thal_3:             "3 — अज्ञात",
 
         // ── BMI Calculator ───────────────────────────────────
         bmi_title:          "बीएमआई कैलकुलेटर — नीचे बीएमआई फ़ील्ड भरता है",
