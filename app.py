@@ -597,6 +597,11 @@ def tips():
     return render_template('tips.html')
 
 
+@app.route('/guide')
+def guide():
+    return render_template('guide.html')
+
+
 @app.route('/history')
 def history():
     predictions = get_all_predictions()

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/translations.js"></script>
+    <style>
+        :root {
+            --bg:           #f0f4f8;
+            --card-bg:      #ffffff;
+            --text:         #1a1a1a;
+            --text-muted:   #6c757d;
+            --acc-bg:       #f8f9fa;
+            --acc-border:   #dee2e6;
+            --acc-btn-bg:   #ffffff;
+            --acc-body-bg:  #ffffff;
+            --table-border: #dee2e6;
+            --table-alt:    #f8f9fa;
+        }
+        body.dark {
+            --bg:           #1a1a2e;
+            --card-bg:      #16213e;
+            --text:         #e0e0e0;
+            --text-muted:   #aaaaaa;
+            --acc-bg:       #0f3460;
+            --acc-border:   #444466;
+            --acc-btn-bg:   #16213e;
+            --acc-body-bg:  #16213e;
+            --table-border: #444466;
+            --table-alt:    #0f3460;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            transition: background 0.3s;
+            margin-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c7be5, #1a68d1);
+            color: white; border-radius: 16px 16px 0 0;
+            padding: 24px; text-align: center;
+            position: relative;
+        }
+        .text-muted { color: var(--text-muted) !important; }
+
+        /* Accordion */
+        .accordion-item {
+            background: var(--acc-btn-bg);
+            border: 1px solid var(--acc-border);
+            margin-bottom: 8px;
+            border-radius: 10px !important;
+            overflow: hidden;
+        }
+        .accordion-button {
+            background: var(--acc-btn-bg) !important;
+            color: var(--text) !important;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+        }
+        .accordion-button:not(.collapsed) {
+            background: #e8f4fd !important;
+            color: #1565c0 !important;
+        }
+        body.dark .accordion-button:not(.collapsed) {
+            background: #0f2d4a !important;
+            color: #64b5f6 !important;
+        }
+        .accordion-body {
+            background: var(--acc-body-bg);
+            color: var(--text);
+            padding: 20px;
+        }
+        .accordion-button::after {
+            filter: none;
+        }
+        body.dark .accordion-button::after {
+            filter: invert(1);
+        }
+
+        /* Info sections inside accordion */
+        .info-section {
+            margin-bottom: 16px;
+        }
+        .info-section h6 {
+            font-weight: 700;
+            color: #2c7be5;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        body.dark .info-section h6 {
+            color: #64b5f6;
+        }
+        .info-section p {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Range table */
+        .range-table {
+            width: 100%;
+            font-size: 0.82rem;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+        .range-table th {
+            background: var(--table-alt);
+            color: var(--text);
+            padding: 6px 10px;
+            border: 1px solid var(--table-border);
+            font-weight: 600;
+        }
+        .range-table td {
+            padding: 6px 10px;
+            border: 1px solid var(--table-border);
+            color: var(--text);
+        }
+        .range-table tr:nth-child(even) td {
+            background: var(--table-alt);
+        }
+
+        /* Improvement tips */
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--acc-border);
+        }
+        .tip-item:last-child { border-bottom: none; }
+        .tip-icon { font-size: 1.1rem; min-width: 24px; }
+        .tip-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+
+        /* Parameter badge */
+        .param-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Nav + buttons */
+        .nav-link-btn {
+            color: white; text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px; border-radius: 20px;
+            font-size: 0.9rem; margin: 2px;
+            display: inline-block;
+        }
+        .nav-link-btn:hover {
+            background: rgba(255,255,255,0.35); color: white;
+        }
+        .dark-toggle {
+            position: absolute; right: 16px; top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none; color: white;
+            padding: 6px 12px; border-radius: 20px;
+            font-size: 1rem; cursor: pointer;
+        }
+        .dark-toggle:hover { background: rgba(255,255,255,0.35); }
+        .btn-blue {
+            background: #2c7be5; color: white; padding: 10px 30px;
+            border-radius: 8px; text-decoration: none;
+            display: inline-block; margin: 4px;
+        }
+        .btn-blue:hover { background: #1a68d1; color: white; }
+        .btn-green {
+            background: #28a745; color: white; padding: 10px 30px;
+            border-radius: 8px; text-decoration: none;
+            display: inline-block; margin: 4px;
+        }
+        .btn-green:hover { background: #218838; color: white; }
+    </style>
+</head>
+<body>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+
+            <!-- Header card -->
+            <div class="card">
+                <div class="header">
+                    <a href="/"        class="nav-link-btn">🩺 Diabetes</a>
+                    <a href="/heart"   class="nav-link-btn">❤️ Heart</a>
+                    <a href="/tips"    class="nav-link-btn">💡 Tips</a>
+                    <a href="/history" class="nav-link-btn">📊 History</a>
+                    <h2 style="margin-top:12px;">🔬 Health Metrics Guide</h2>
+                    <p class="mb-2">
+                        Understand every parameter used in your risk prediction
+                    </p>
+                    <!-- Language Toggle -->
+                    <div style="margin-bottom:8px;">
+                        <button class="lang-btn" data-lang="en"
+                                onclick="applyLanguage('en')"
+                                style="background:rgba(255,255,255,0.2);
+                                       border:none; color:white; padding:4px 12px;
+                                       border-radius:20px; cursor:pointer;
+                                       font-size:0.85rem; margin:2px;">
+                            EN
+                        </button>
+                        <button class="lang-btn" data-lang="kn"
+                                onclick="applyLanguage('kn')"
+                                style="background:rgba(255,255,255,0.2);
+                                       border:none; color:white; padding:4px 12px;
+                                       border-radius:20px; cursor:pointer;
+                                       font-size:0.85rem; margin:2px;">
+                            ಕನ್ನಡ
+                        </button>
+                        <button class="lang-btn" data-lang="hi"
+                                onclick="applyLanguage('hi')"
+                                style="background:rgba(255,255,255,0.2);
+                                       border:none; color:white; padding:4px 12px;
+                                       border-radius:20px; cursor:pointer;
+                                       font-size:0.85rem; margin:2px;">
+                            हिंदी
+                        </button>
+                    </div>
+                    <button class="dark-toggle" onclick="toggleDark()"
+                            id="darkBtn">🌙</button>
+                </div>
+                <div class="card-body p-3">
+                    <p class="text-muted mb-0" style="font-size:0.88rem; text-align:center;">
+                        Click any parameter below to expand its full explanation,
+                        normal ranges and improvement tips.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Accordion -->
+            <div class="accordion" id="metricsAccordion">
+
+                <!-- 1. Glucose -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#glucose">
+                            🩸 Glucose (Blood Sugar)
+                            <span class="param-badge"
+                                  style="background:#fff3e0; color:#e65100;">
+                                Key Predictor #1
+                            </span>
+                        </button>
+                    </h2>
+                    <div id="glucose" class="accordion-collapse collapse show"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>Blood glucose is the amount of sugar circulating in your blood. Your body uses glucose as its primary energy source. The pancreas produces insulin to help cells absorb glucose — when this system fails, glucose builds up in the blood, leading to diabetes.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Normal Ranges (Indian Guidelines)</h6>
+                                <table class="range-table">
+                                    <tr>
+                                        <th>Condition</th>
+                                        <th>Fasting</th>
+                                        <th>Post-Meal (2hr)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>✅ Normal</td>
+                                        <td>Below 100 mg/dL</td>
+                                        <td>Below 140 mg/dL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>🟡 Prediabetes</td>
+                                        <td>100–125 mg/dL</td>
+                                        <td>140–199 mg/dL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>🔴 Diabetes</td>
+                                        <td>126+ mg/dL</td>
+                                        <td>200+ mg/dL</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>⚠️ Why context matters</h6>
+                                <p>A glucose of 130 mg/dL is <strong>concerning if fasting</strong> (above the 126 diabetes threshold) but <strong>normal after a meal</strong> (below 140). Always note when your blood sugar was measured.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 How to improve it</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🥗</div>
+                                    <div class="tip-text">Replace white rice and maida with ragi, jowar or brown rice — they digest slower and cause smaller blood sugar spikes.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🚶</div>
+                                    <div class="tip-text">A 20-minute walk after meals significantly lowers post-meal glucose — more effective than walking at other times.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">💧</div>
+                                    <div class="tip-text">Stay well hydrated — dehydration concentrates blood sugar. Replace sugary drinks with water or buttermilk.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">😴</div>
+                                    <div class="tip-text">Poor sleep raises blood sugar. Even one night of bad sleep can spike fasting glucose by 10–15%.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. BMI -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#bmi">
+                            ⚖️ BMI (Body Mass Index)
+                            <span class="param-badge"
+                                  style="background:#fff3e0; color:#e65100;">
+                                Key Predictor #2
+                            </span>
+                        </button>
+                    </h2>
+                    <div id="bmi" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>BMI is your weight in kilograms divided by your height in metres squared (kg/m²). It's a simple screening tool to categorize weight status. Higher BMI increases insulin resistance — a key driver of Type 2 diabetes.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Asian / Indian Guidelines</h6>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">
+                                    Note: Indian guidelines use lower thresholds than Western standards because Indians develop metabolic disease at lower BMIs.
+                                </p>
+                                <table class="range-table">
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Asian BMI</th>
+                                        <th>Western BMI</th>
+                                    </tr>
+                                    <tr><td>✅ Normal</td><td>18.5–22.9</td><td>18.5–24.9</td></tr>
+                                    <tr><td>🟡 Overweight</td><td>23–27.4</td><td>25–29.9</td></tr>
+                                    <tr><td>🔴 Obese</td><td>27.5+</td><td>30+</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 How to improve it</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🎯</div>
+                                    <div class="tip-text">Even losing 3–5% of body weight (2–3 kg for most people) significantly reduces diabetes risk — you don't need to reach ideal BMI.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🍽️</div>
+                                    <div class="tip-text">Use smaller plates and eat slowly — it takes 20 minutes for your brain to register fullness. Reduce portion size before changing what you eat.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🏋️</div>
+                                    <div class="tip-text">Strength training builds muscle which burns more calories at rest. Even simple bodyweight exercises 3x/week make a difference.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🥤</div>
+                                    <div class="tip-text">Cutting out sugary drinks alone (chai with 2 spoons sugar, soft drinks, packaged juices) can lead to 2–3 kg weight loss over 3 months.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Blood Pressure -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#bp">
+                            💉 Blood Pressure
+                        </button>
+                    </h2>
+                    <div id="bp" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>Blood pressure measures the force of blood against artery walls. It has two numbers: systolic (when heart beats) / diastolic (when heart rests). This app uses the <strong>diastolic value</strong> (the lower number) which is more sensitive to early cardiovascular risk.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Normal Ranges</h6>
+                                <table class="range-table">
+                                    <tr><th>Category</th><th>Diastolic (mm Hg)</th></tr>
+                                    <tr><td>✅ Normal</td><td>60–80</td></tr>
+                                    <tr><td>🟡 Elevated</td><td>80–89</td></tr>
+                                    <tr><td>🔴 High (Stage 1)</td><td>90–99</td></tr>
+                                    <tr><td>🔴 High (Stage 2)</td><td>100+</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>🔗 Link to diabetes</h6>
+                                <p>High blood pressure and diabetes frequently co-occur — they share common risk factors like obesity, inactivity and poor diet. Having both dramatically increases risk of kidney disease, stroke and heart attack.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 How to improve it</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🧂</div>
+                                    <div class="tip-text">Reduce salt intake — most Indians consume 2–3x the recommended amount. Avoid pickles, papads, processed foods and excessive salt in cooking.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🚶</div>
+                                    <div class="tip-text">Regular aerobic exercise (brisk walking 30 min daily) can lower diastolic BP by 4–9 mm Hg over weeks.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🧘</div>
+                                    <div class="tip-text">Chronic stress raises BP. Even 10 minutes of deep breathing or meditation daily has measurable effects.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Insulin -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#insulin">
+                            💊 Insulin Level
+                        </button>
+                    </h2>
+                    <div id="insulin" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>Insulin is a hormone produced by the pancreas that allows cells to absorb glucose from the blood. In Type 2 diabetes, cells become resistant to insulin — so the pancreas produces more, leading to high insulin levels. Eventually the pancreas may burn out, leading to low insulin.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Normal Range</h6>
+                                <table class="range-table">
+                                    <tr><th>Status</th><th>Fasting Insulin (µU/mL)</th></tr>
+                                    <tr><td>✅ Normal</td><td>16–166</td></tr>
+                                    <tr><td>🟡 Low</td><td>Below 16</td></tr>
+                                    <tr><td>🔴 High (resistance)</td><td>Above 166</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>⚠️ Zero value note</h6>
+                                <p>Many people don't know their insulin level — if you entered 0, the model uses dataset averages for this field. Getting your fasting insulin tested gives a much more accurate risk picture.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 How to improve insulin sensitivity</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🏃</div>
+                                    <div class="tip-text">Exercise is the most powerful way to improve insulin sensitivity — muscles absorb glucose without needing insulin during activity.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🫘</div>
+                                    <div class="tip-text">Eat more legumes and fibre — dal, rajma, chana slow digestion and reduce insulin spikes after meals.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">⏰</div>
+                                    <div class="tip-text">Intermittent fasting (eating within a 10-hour window) can significantly improve insulin sensitivity over weeks.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Skin Thickness -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#skin">
+                            📏 Skin Thickness
+                        </button>
+                    </h2>
+                    <div id="skin" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>Skin thickness (specifically triceps skinfold thickness) is measured using calipers to estimate subcutaneous body fat — the fat stored just under the skin. Higher skinfold thickness indicates higher overall body fat percentage, which is linked to insulin resistance.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Normal Ranges</h6>
+                                <table class="range-table">
+                                    <tr><th>Category</th><th>Range (mm)</th></tr>
+                                    <tr><td>✅ Normal</td><td>10–40</td></tr>
+                                    <tr><td>🔵 Low (may be unmeasured)</td><td>Below 10</td></tr>
+                                    <tr><td>🟡 Elevated</td><td>Above 40</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>⚠️ Practical note</h6>
+                                <p>Most people don't have access to skinfold calipers. If you don't know this value, enter 20 (near population average) — it's better than entering 0 which the model will misinterpret as an actual measurement.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 How to reduce body fat</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🎯</div>
+                                    <div class="tip-text">Combination of cardio (walking, cycling) and strength training reduces body fat more effectively than either alone.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🥗</div>
+                                    <div class="tip-text">Prioritize protein and fibre at every meal — they keep you full longer and reduce overall calorie intake naturally.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Diabetes Pedigree Function -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#dpf">
+                            🧬 Diabetes Pedigree Function
+                            <span class="param-badge"
+                                  style="background:#f3e5f5; color:#6a1b9a;">
+                                Genetic
+                            </span>
+                        </button>
+                    </h2>
+                    <div id="dpf" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 What is it?</h6>
+                                <p>The Diabetes Pedigree Function (DPF) is a score developed by researchers that quantifies genetic risk based on family history. It considers which relatives have diabetes and how closely related they are. A higher score means stronger inherited risk.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Score Ranges</h6>
+                                <table class="range-table">
+                                    <tr><th>Risk Level</th><th>DPF Score</th></tr>
+                                    <tr><td>✅ Low genetic risk</td><td>Below 0.3</td></tr>
+                                    <tr><td>🟡 Moderate</td><td>0.3–0.6</td></tr>
+                                    <tr><td>🔴 High genetic risk</td><td>Above 0.6</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>🧮 How to estimate your score</h6>
+                                <table class="range-table">
+                                    <tr><th>Family history</th><th>Approximate DPF</th></tr>
+                                    <tr><td>No family history</td><td>0.1–0.2</td></tr>
+                                    <tr><td>One grandparent with diabetes</td><td>0.2–0.4</td></tr>
+                                    <tr><td>One parent with diabetes</td><td>0.4–0.6</td></tr>
+                                    <tr><td>Both parents with diabetes</td><td>0.6–1.0</td></tr>
+                                    <tr><td>Multiple close relatives</td><td>Above 1.0</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 What you can do about genetic risk</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🧬</div>
+                                    <div class="tip-text">Genetics loads the gun but lifestyle pulls the trigger. Studies show lifestyle changes reduce diabetes risk by 58% even in high genetic-risk groups.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🩺</div>
+                                    <div class="tip-text">If you have a strong family history, start annual screening at age 25 instead of waiting — early detection is everything.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">👨‍👩‍👧</div>
+                                    <div class="tip-text">Share your family history with your doctor — it changes their screening approach and may qualify you for preventive programs.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Age -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#age">
+                            🎂 Age
+                        </button>
+                    </h2>
+                    <div id="age" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 Why age matters</h6>
+                                <p>Diabetes risk increases with age due to gradual decline in insulin sensitivity, muscle mass loss, reduced physical activity, and accumulated metabolic stress. However, India is seeing rapidly increasing rates in young adults (25–44) due to lifestyle changes — making early screening important at any age.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Risk by age group (India)</h6>
+                                <table class="range-table">
+                                    <tr><th>Age Group</th><th>Risk Level</th><th>Recommendation</th></tr>
+                                    <tr><td>Under 30</td><td>🟢 Lower</td><td>Screen if family history</td></tr>
+                                    <tr><td>30–44</td><td>🟡 Increasing</td><td>Screen every 2 years</td></tr>
+                                    <tr><td>45–59</td><td>🔴 High</td><td>Screen annually</td></tr>
+                                    <tr><td>60+</td><td>🔴 Very High</td><td>Screen every 6 months</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 Age-specific tips</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">💪</div>
+                                    <div class="tip-text">After 40, muscle mass naturally declines — add strength training to preserve it. More muscle means better glucose metabolism.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🩺</div>
+                                    <div class="tip-text">After 45, get a comprehensive metabolic panel annually — glucose, HbA1c, cholesterol, kidney function, liver function.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Pregnancies -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#preg">
+                            🤰 Pregnancies
+                        </button>
+                    </h2>
+                    <div id="preg" class="accordion-collapse collapse"
+                         data-bs-parent="#metricsAccordion">
+                        <div class="accordion-body">
+                            <div class="info-section">
+                                <h6>🔍 Why it matters</h6>
+                                <p>The number of pregnancies is a risk factor because gestational diabetes (diabetes during pregnancy) is a strong predictor of later Type 2 diabetes. Women who had gestational diabetes have a 7–10x higher lifetime risk. Each additional pregnancy also adds metabolic stress.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>📊 Risk by pregnancy count</h6>
+                                <table class="range-table">
+                                    <tr><th>Pregnancies</th><th>Risk Level</th></tr>
+                                    <tr><td>0</td><td>🟢 No gestational history</td></tr>
+                                    <tr><td>1–3</td><td>🟢 Low added risk</td></tr>
+                                    <tr><td>4–6</td><td>🟡 Moderate added risk</td></tr>
+                                    <tr><td>7+</td><td>🔴 Higher risk — screen regularly</td></tr>
+                                </table>
+                            </div>
+                            <div class="info-section">
+                                <h6>⚠️ Note for men</h6>
+                                <p>Enter 0 if you are male — this field will have no impact on your prediction. The model was trained on female data, so males using this tool should note the prediction may be slightly less accurate.</p>
+                            </div>
+                            <div class="info-section">
+                                <h6>💡 What to do if you had gestational diabetes</h6>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🩺</div>
+                                    <div class="tip-text">Get tested for diabetes 6–12 weeks after delivery and then every 1–3 years — your risk of developing Type 2 diabetes is significantly elevated.</div>
+                                </div>
+                                <div class="tip-item">
+                                    <div class="tip-icon">🥗</div>
+                                    <div class="tip-text">Breastfeeding, maintaining healthy weight and regular exercise after pregnancy significantly reduce your long-term risk.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End accordion -->
+
+            <!-- Bottom disclaimer -->
+            <div style="background:var(--card-bg); border-radius:12px;
+                        padding:16px 20px; margin-top:8px;
+                        border:1px solid var(--acc-border);">
+                <p style="font-size:0.82rem; color:var(--text-muted); margin:0; text-align:center;">
+                    ⚕️ This guide is for educational purposes only. Normal ranges are
+                    reference values — your personal targets may differ. Always consult
+                    a qualified doctor for medical advice specific to your situation.
+                </p>
+            </div>
+
+            <!-- Bottom nav -->
+            <div class="text-center mt-4">
+                <a href="/"      class="btn-blue">🩺 Check Diabetes Risk</a>
+                <a href="/heart" class="btn-blue" style="background:#e53935;">
+                    ❤️ Check Heart Risk
+                </a>
+                <a href="/tips"  class="btn-green">💚 Health Tips</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+// ── Dark Mode ─────────────────────────────────────────────
+function toggleDark() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('darkMode', isDark);
+    document.getElementById('darkBtn').textContent = isDark ? '☀️' : '🌙';
+}
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+        document.getElementById('darkBtn').textContent = '☀️';
+    }
+    initLanguage();
+});
+</script>
+
+<!-- Bootstrap JS for accordion -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

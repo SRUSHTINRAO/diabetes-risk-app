@@ -15,6 +15,7 @@ const translations = {
         nav_heart:          "Heart Disease",
         nav_diabetes:       "Diabetes Predictor",
         nav_history:        "History",
+        nav_guide:          "Metrics Guide",
 
         // ── Form labels ──────────────────────────────────────
         label_pregnancies:  "Pregnancies",
@@ -203,6 +204,7 @@ const translations = {
         nav_heart:          "ಹೃದಯ ರೋಗ",
         nav_diabetes:       "ಮಧುಮೇಹ ಮುನ್ಸೂಚಕ",
         nav_history:        "ಇತಿಹಾಸ",
+        nav_guide:          "ಮೆಟ್ರಿಕ್ಸ್ ಮಾರ್ಗದರ್ಶಿ",
 
         // ── Form labels ──────────────────────────────────────
         label_pregnancies:  "ಗರ್ಭಧಾರಣೆಗಳು",
@@ -391,6 +393,7 @@ const translations = {
         nav_heart:          "हृदय रोग",
         nav_diabetes:       "मधुमेह भविष्यवक्ता",
         nav_history:        "इतिहास",
+        nav_guide:          "मेट्रिक्स गाइड",
 
         // ── Form labels ──────────────────────────────────────
         label_pregnancies:  "गर्भधारण",
